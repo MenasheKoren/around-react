@@ -1,11 +1,13 @@
-import "./index.css";
+import "../index.css";
+import logo from "../images/logo.svg";
 
 function App(props) {
   return (
+    <body className="page">
     <div className="content">
       <header className="header">
         <img
-          src="<%=require('./images/logo.svg')%>"
+          src={logo}
           alt="Around the U.S. logo"
           className="header__logo"
         />
@@ -198,6 +200,7 @@ function App(props) {
         </div>
       </section>
     </div>
+    </body>
   );
 }
 
