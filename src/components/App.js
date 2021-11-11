@@ -1,58 +1,15 @@
 import "../index.css";
-import logo from "../images/logo.svg";
+import { Header } from "./Header";
+import { Main } from "./Main";
+import { Footer } from "./Footer";
 
 function App(props) {
   return (
     <body className="page">
     <div className="content">
-      <header className="header">
-        <img
-          src={logo}
-          alt="Around the U.S. logo"
-          className="header__logo"
-        />
-      </header>
-      
-      <main className="main">
-        <section className="profile">
-          <div className="avatar">
-            <img
-              className="avatar__image"
-              src="<%=require('./images/cousteau.jpg')%>"
-              alt="Jacques Cousteau smiling on the sea"
-            />
-            <img
-              className="avatar__edit-icon"
-              src="<%=require('./images/edit.svg')%>"
-              alt="Edit icon"
-            />
-          </div>
-          <div className="profile-info">
-            <div className="profile-info__name">
-              <div className="profile-info__edit">
-                <h1 className="edit-name ellipses">Jacques Cousteau</h1>
-                <button
-                  className="edit-button button button_hover_dark"
-                  type="button"
-                />
-              </div>
-              <p className="profile-info__profession ellipses">Explorer</p>
-            </div>
-            <button
-              className="add-button button button_hover_dark"
-              type="button"
-            />
-          </div>
-        </section>
-        
-        <section className="cards">
-          <ul className="card-list"></ul>
-        </section>
-      </main>
-      
-      <footer className="footer">
-        <p className="footer__text">&copy; 2021 Around The U.S.</p>
-      </footer>
+      <Header />
+      <Main />
+      <Footer />
       
       <section className="popup popup_type_edit-profile">
         <div className="popup__container">
