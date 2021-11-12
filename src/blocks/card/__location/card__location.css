@@ -1,8 +1,7 @@
 .card__location {
-  color: rgba(0, 0, 0, 1);
-  font-weight: 900;
-  font-size: 24px;
-  line-height: 121%;
-  margin: 0;
- }
-
+    color: rgba(0, 0, 0, 1);
+    font-weight: 900;
+    font-size: 24px;
+    line-height: 121%;
+    margin: 0;
+}

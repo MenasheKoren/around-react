@@ -3,21 +3,18 @@ import edit from "../images/edit.svg";
 
 export function Main() {
   const handleEditAvatarClick = () => {
-    document
-      .querySelector(".popup_type_edit-avatar")
-      .classList.add("popup_opened");
+    const avatarModal = document.querySelector(".popup_type_edit-avatar");
+    avatarModal.classList.add("popup_opened");
   };
   
   const handleEditProfileClick = () => {
-    document
-      .querySelector(".popup_type_edit-profile")
-      .classList.add("popup_opened");
+    const profileModal = document.querySelector(".popup_type_edit-profile");
+    profileModal.classList.add("popup_opened");
   };
   
   const handleAddPlaceClick = () => {
-    document
-      .querySelector(".popup_type_add-card")
-      .classList.add("popup_opened");
+    const cardModal = document.querySelector(".popup_type_add-card");
+    cardModal.classList.add("popup_opened");
   };
   
   return (

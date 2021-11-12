@@ -1,18 +1,15 @@
 .edit-button {
-  border: 1px solid rgba(255, 255, 255, 1);
-  padding: .328125rem;
-  background: url(../../images/edit.svg) no-repeat center;
-  min-height: 1.125rem;
-  min-width: 1.125rem;
+    border: 1px solid rgba(255, 255, 255, 1);
+    padding: 0.328125rem;
+    background: url(../../images/edit.svg) no-repeat center;
+    min-height: 1.125rem;
+    min-width: 1.125rem;
 }
-
 
 @media screen and (min-width: 768px) {
-   .edit-button {
-    min-height: 1.5rem;
-    min-width: 1.5rem;
-    padding: .4375rem;
-  }
+    .edit-button {
+        min-height: 1.5rem;
+        min-width: 1.5rem;
+        padding: 0.4375rem;
+    }
 }
-
-
