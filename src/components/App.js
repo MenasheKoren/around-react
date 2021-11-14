@@ -12,10 +12,22 @@ function App() {
         <Main />
         <Footer />
         
-        <PopupWithForm name="edit-avatar" title="Update profile picture" />
-        <PopupWithForm name="edit-profile" title="Edit profile" />
-        <PopupWithForm name="add-card" title="New place" />
-        <PopupWithForm name="remove-card" title="Are you sure?" />
+        <PopupWithForm
+          name="edit-avatar"
+          title="Update profile picture"
+          message="Save"
+        >
+        
+        </PopupWithForm>
+        <PopupWithForm name="edit-profile" title="Edit profile" message="Save">
+        
+        </PopupWithForm>
+        <PopupWithForm name="add-card" title="New place" message="Create">
+        
+        </PopupWithForm>
+        <PopupWithForm name="remove-card" title="Are you sure?" message="Yes">
+        
+        </PopupWithForm>
         <section className="popup popup_type_image">
           <div className="popup__container popup__container_type_image">
             <button
