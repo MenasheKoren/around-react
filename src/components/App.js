@@ -16,6 +16,7 @@ function App() {
           name="edit-avatar"
           title="Update profile picture"
           message="Save"
+        
         >
         
         </PopupWithForm>

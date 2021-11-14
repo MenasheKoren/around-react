@@ -1,25 +1,29 @@
+/*
+import { PopupWithForm } from "./PopupWithForm";
+*/
+
 export const PopupFormTemplate = () => {
   return (
-    <>
-      <EditAvatarForm>
-        <input
-          id="image-link-input"
-          className="field-input field-input_type_image-link"
-          name="image-link"
-          type="url"
-          placeholder="Image URL"
-          required
-        />
-        <span className="error-message" id="image-link-input-error" />
-        <button
-          className="popup__save button button_hover_darker"
-          type="submit"
-          disabled
-        >
-          Save
-        </button>
-      </EditAvatarForm>
-    </>
+    <PopupWithForm>
+      <p>This is a test</p>
+      
+      {/*<input
+        id="image-link-input"
+        className="field-input field-input_type_image-link"
+        name="image-link"
+        type="url"
+        placeholder="Image URL"
+        required
+      />
+      <span className="error-message" id="image-link-input-error" />
+      <button
+        className="popup__save button button_hover_darker"
+        type="submit"
+        disabled
+      >
+        Save
+      </button>*/}
+    </PopupWithForm>
   );
 };
 
