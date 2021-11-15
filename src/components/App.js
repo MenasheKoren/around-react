@@ -4,7 +4,7 @@ import { Main } from "./Main";
 import { Footer } from "./Footer";
 import { PopupWithForm } from "./PopupWithForm";
 import { PopupWithImage } from "./PopupWithImage";
-import React from "react";
+import React, { useState } from "react";
 
 export function App() {
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] =
@@ -25,6 +25,12 @@ export function App() {
     setIsAddPlacePopupOpen(!isAddPlacePopupOpen);
   }
   
+  function closeAllPopups() {
+    setIsEditAvatarPopupOpen(!isEditAvatarPopupOpen);
+    setIsEditProfilePopupOpen(!isEditProfilePopupOpen);
+    setIsAddPlacePopupOpen(!isAddPlacePopupOpen);
+  }
+  
   return (
     <div className="page">
       <div className="content">
@@ -42,6 +48,7 @@ export function App() {
           title="Update profile picture"
           message="Save"
           isOpen={isEditAvatarPopupOpen}
+          onClose={closeAllPopups}
         >
           <input
             id="image-link-input"
@@ -65,6 +72,7 @@ export function App() {
           title="Edit profile"
           message="Save"
           isOpen={isEditProfilePopupOpen}
+          onClose={closeAllPopups}
         >
           <input
             id="name-input"
@@ -105,6 +113,7 @@ export function App() {
           title="New place"
           message="Create"
           isOpen={isAddPlacePopupOpen}
+          onClose={closeAllPopups}
         >
           <input
             id="card-title-input"
@@ -142,6 +151,7 @@ export function App() {
           title="Are you sure?"
           message="Yes"
           isOpen={false}
+        
         >
           <button
             className="popup__save popup__save_type_remove-card button button_hover_darker"
