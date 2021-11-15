@@ -1,6 +1,4 @@
 export const PopupWithForm = ({ name, title, children, isOpen }) => {
-  console.log(children);
-  
   return (
     <>
       <section

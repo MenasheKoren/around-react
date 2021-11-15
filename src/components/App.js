@@ -4,34 +4,44 @@ import { Main } from "./Main";
 import { Footer } from "./Footer";
 import { PopupWithForm } from "./PopupWithForm";
 import { PopupWithImage } from "./PopupWithImage";
+import React from "react";
 
-export function App({ name }) {
-  const handleModalClick = () => {
-    const modal = document.querySelector(`.popup_type_${name}`);
-    modal.classList.add("popup_opened");
-  };
+export function App() {
+  const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] =
+    React.useState(false);
+  const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] =
+    React.useState(false);
+  const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
   
-  // const handleEditProfileClick = () => {
-  //   const profileModal = document.querySelector(".popup_type_edit-profile");
-  //   profileModal.classList.add("popup_opened");
-  // };
-  //
-  // const handleAddPlaceClick = () => {
-  //   const cardModal = document.querySelector(".popup_type_add-card");
-  //   cardModal.classList.add("popup_opened");
-  // };
+  function handleEditAvatarClick() {
+    setIsEditAvatarPopupOpen(!isEditAvatarPopupOpen);
+  }
+  
+  function handleEditProfileClick() {
+    setIsEditProfilePopupOpen(!isEditProfilePopupOpen);
+  }
+  
+  function handleAddPlaceClick() {
+    setIsAddPlacePopupOpen(!isAddPlacePopupOpen);
+  }
+  
   return (
     <div className="page">
       <div className="content">
         <Header />
-        <Main />
+        <Main
+          onEditAvatarClick={handleEditAvatarClick}
+          onEditProfileClick={handleEditProfileClick}
+          onAddPlaceClick={handleAddPlaceClick}
+          onCardClick={PopupWithImage}
+        />
         <Footer />
         
         <PopupWithForm
           name="edit-avatar"
           title="Update profile picture"
           message="Save"
-          isOpen={true}
+          isOpen={isEditAvatarPopupOpen}
         >
           <input
             id="image-link-input"
@@ -54,7 +64,7 @@ export function App({ name }) {
           name="edit-profile"
           title="Edit profile"
           message="Save"
-          isOpen={true}
+          isOpen={isEditProfilePopupOpen}
         >
           <input
             id="name-input"
@@ -94,7 +104,7 @@ export function App({ name }) {
           name="add-card"
           title="New place"
           message="Create"
-          isOpen={true}
+          isOpen={isAddPlacePopupOpen}
         >
           <input
             id="card-title-input"
@@ -131,7 +141,7 @@ export function App({ name }) {
           name="remove-card"
           title="Are you sure?"
           message="Yes"
-          isOpen={true}
+          isOpen={false}
         >
           <button
             className="popup__save popup__save_type_remove-card button button_hover_darker"
