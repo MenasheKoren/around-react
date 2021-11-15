@@ -4,7 +4,7 @@ import { Main } from "./Main";
 import { Footer } from "./Footer";
 import { PopupWithForm } from "./PopupWithForm";
 import { PopupWithImage } from "./PopupWithImage";
-import React from "react";
+import React, { useState } from "react";
 
 export function App() {
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] =
