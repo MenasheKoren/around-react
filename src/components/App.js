@@ -5,7 +5,21 @@ import { Footer } from "./Footer";
 import { PopupWithForm } from "./PopupWithForm";
 import { PopupWithImage } from "./PopupWithImage";
 
-function App() {
+export function App({ name }) {
+  const handleModalClick = () => {
+    const modal = document.querySelector(`.popup_type_${name}`);
+    modal.classList.add("popup_opened");
+  };
+  
+  // const handleEditProfileClick = () => {
+  //   const profileModal = document.querySelector(".popup_type_edit-profile");
+  //   profileModal.classList.add("popup_opened");
+  // };
+  //
+  // const handleAddPlaceClick = () => {
+  //   const cardModal = document.querySelector(".popup_type_add-card");
+  //   cardModal.classList.add("popup_opened");
+  // };
   return (
     <div className="page">
       <div className="content">
@@ -17,6 +31,7 @@ function App() {
           name="edit-avatar"
           title="Update profile picture"
           message="Save"
+          isOpen={true}
         >
           <input
             id="image-link-input"
@@ -35,7 +50,12 @@ function App() {
             Save
           </button>
         </PopupWithForm>
-        <PopupWithForm name="edit-profile" title="Edit profile" message="Save">
+        <PopupWithForm
+          name="edit-profile"
+          title="Edit profile"
+          message="Save"
+          isOpen={true}
+        >
           <input
             id="name-input"
             className="field-input field-input_type_name"
@@ -70,7 +90,12 @@ function App() {
             Save
           </button>
         </PopupWithForm>
-        <PopupWithForm name="add-card" title="New place" message="Create">
+        <PopupWithForm
+          name="add-card"
+          title="New place"
+          message="Create"
+          isOpen={true}
+        >
           <input
             id="card-title-input"
             className="field-input field-input_type_card-title"
@@ -102,7 +127,12 @@ function App() {
             Create
           </button>
         </PopupWithForm>
-        <PopupWithForm name="remove-card" title="Are you sure?" message="Yes">
+        <PopupWithForm
+          name="remove-card"
+          title="Are you sure?"
+          message="Yes"
+          isOpen={true}
+        >
           <button
             className="popup__save popup__save_type_remove-card button button_hover_darker"
             type="submit"

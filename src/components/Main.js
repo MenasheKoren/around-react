@@ -1,8 +1,11 @@
 import cousteau from "../images/cousteau.jpg";
 import edit from "../images/edit.svg";
 
-export function Main() {
-  const handleEditAvatarClick = () => {
+export function Main({ handleModalClick }) {
+  /*
+    handleModalClick = this.props;
+  */
+  /*const handleEditAvatarClick = () => {
     const avatarModal = document.querySelector(".popup_type_edit-avatar");
     avatarModal.classList.add("popup_opened");
   };
@@ -15,7 +18,7 @@ export function Main() {
   const handleAddPlaceClick = () => {
     const cardModal = document.querySelector(".popup_type_add-card");
     cardModal.classList.add("popup_opened");
-  };
+  };*/
   
   return (
     <main className="main">
@@ -27,7 +30,7 @@ export function Main() {
             alt="Jacques Cousteau smiling on the sea"
           />
           <img
-            onClick={handleEditAvatarClick}
+            onClick={handleModalClick}
             className="avatar__edit-icon"
             src={edit}
             alt="Edit icon"
@@ -38,7 +41,7 @@ export function Main() {
             <div className=" profile-info__edit">
               <h1 className=" edit-name ellipses">Jacques Cousteau</h1>
               <button
-                onClick={handleEditProfileClick}
+                onClick={handleModalClick}
                 className=" edit-button button button_hover_dark"
                 type=" button"
               />
@@ -46,7 +49,7 @@ export function Main() {
             <p className=" profile-info__profession ellipses">Explorer</p>
           </div>
           <button
-            onClick={handleAddPlaceClick}
+            onClick={handleModalClick}
             className=" add-button button button_hover_dark"
             type=" button"
           />

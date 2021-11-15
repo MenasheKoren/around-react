@@ -1,9 +1,14 @@
-export const PopupWithForm = ({ name, title, children }) => {
+export const PopupWithForm = ({ name, title, children, isOpen }) => {
   console.log(children);
   
   return (
     <>
-      <section className={`popup popup_type_${name}`}>
+      <section
+        className={[
+          `popup popup_type_${name}`,
+          isOpen ? "popup_opened" : ""
+        ].join(" ")}
+      >
         <div className="popup__container">
           <button
             className="popup__close button button_hover_dark"
