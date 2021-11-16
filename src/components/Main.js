@@ -1,7 +1,13 @@
 import cousteau from "../images/cousteau.jpg";
 import edit from "../images/edit.svg";
+import React from "react";
+import { api } from "../utils/api";
 
 export function Main(props) {
+  const [isUserName, setIsUserName] = React.useState();
+  const [isUserDescription, setIsUserDescription] = React.useState();
+  const [isUserAvatar, setIsUserAvatar] = React.useState();
+  
   return (
     <main className="main">
       <section className="profile">
