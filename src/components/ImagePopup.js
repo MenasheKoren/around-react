@@ -1,4 +1,4 @@
-export const PopupWithImage = () => {
+export const ImagePopup = () => {
   return (
     <section className="popup popup_type_image">
       <div className="popup__container popup__container_type_image">

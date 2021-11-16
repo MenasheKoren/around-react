@@ -13,12 +13,7 @@ export const PopupWithForm = ({
           isOpen ? "popup_opened" : ""
         ].join(" ")}
       >
-        <div
-          className="popup__container"
-          onBlur={(e) => {
-            console.log("Triggered because this input lost focus");
-          }}
-        >
+        <div className="popup__container">
           <button
             className="popup__close button button_hover_dark"
             type="button"

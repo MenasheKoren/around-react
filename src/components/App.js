@@ -3,7 +3,7 @@ import { Header } from "./Header";
 import { Main } from "./Main";
 import { Footer } from "./Footer";
 import { PopupWithForm } from "./PopupWithForm";
-import { PopupWithImage } from "./PopupWithImage";
+import { ImagePopup } from "./ImagePopup";
 import React from "react";
 
 export function App() {
@@ -12,6 +12,8 @@ export function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] =
     React.useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
+  const [isDeletePlacePopupOpen, setIsDeletePlacePopupOpen] =
+    React.useState(false);
   
   function handleEditAvatarClick() {
     setIsEditAvatarPopupOpen(true);
@@ -25,18 +27,16 @@ export function App() {
     setIsAddPlacePopupOpen(true);
   }
   
+  function handleDeletePlaceClick() {
+    setIsDeletePlacePopupOpen(true);
+  }
   
-  const closeAllPopups = () => {
-    /*if (
-      evt.key === "Escape" ||
-      evt.target.classList.contains("popup__close") ||
-      !evt.target.closest(".popup__container")
-    ) {*/
+  function closeAllPopups() {
     setIsEditAvatarPopupOpen(false);
     setIsEditProfilePopupOpen(false);
     setIsAddPlacePopupOpen(false);
-    // }
-  };
+    setIsDeletePlacePopupOpen(false);
+  }
   
   return (
     <div className="page">
@@ -46,7 +46,8 @@ export function App() {
           onEditAvatarClick={handleEditAvatarClick}
           onEditProfileClick={handleEditProfileClick}
           onAddPlaceClick={handleAddPlaceClick}
-          onCardClick={PopupWithImage}
+          onCardClick={ImagePopup}
+          onDeletePlaceClick={handleDeletePlaceClick}
         />
         <Footer />
         
@@ -56,10 +57,6 @@ export function App() {
           message="Save"
           isOpen={isEditAvatarPopupOpen}
           closeAllPopups={closeAllPopups}
-          // onBlur={(e) => {
-          //   console.log("Triggered because this input lost focus");
-          // }}
-        
         >
           <input
             id="image-link-input"
@@ -73,7 +70,7 @@ export function App() {
           <button
             className="popup__save button button_hover_darker"
             type="submit"
-            disabled
+            // disabled
           >
             Save
           </button>
@@ -84,8 +81,6 @@ export function App() {
           message="Save"
           isOpen={isEditProfilePopupOpen}
           closeAllPopups={closeAllPopups}
-          onBlur={closeAllPopups}
-        
         >
           <input
             id="name-input"
@@ -116,7 +111,7 @@ export function App() {
           <button
             className="popup__save button button_hover_darker"
             type="submit"
-            disabled
+            // disabled
           >
             Save
           </button>
@@ -127,7 +122,6 @@ export function App() {
           message="Create"
           isOpen={isAddPlacePopupOpen}
           closeAllPopups={closeAllPopups}
-          onBlur={closeAllPopups}
         >
           <input
             id="card-title-input"
@@ -155,7 +149,7 @@ export function App() {
           <button
             className="popup__save button button_hover_darker"
             type="submit"
-            disabled
+            // disabled
           >
             Create
           </button>
@@ -164,7 +158,8 @@ export function App() {
           name="remove-card"
           title="Are you sure?"
           message="Yes"
-          isOpen={false}
+          isOpen={isDeletePlacePopupOpen}
+          closeAllPopups={closeAllPopups}
         >
           <button
             className="popup__save popup__save_type_remove-card button button_hover_darker"
@@ -173,7 +168,7 @@ export function App() {
             Yes
           </button>
         </PopupWithForm>
-        <PopupWithImage />
+        <ImagePopup />
       </div>
     </div>
   );
