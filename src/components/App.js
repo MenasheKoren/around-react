@@ -25,6 +25,7 @@ export function App() {
     setIsAddPlacePopupOpen(true);
   }
   
+  
   const closeAllPopups = () => {
     /*if (
       evt.key === "Escape" ||
@@ -54,7 +55,11 @@ export function App() {
           title="Update profile picture"
           message="Save"
           isOpen={isEditAvatarPopupOpen}
-          onClose={closeAllPopups}
+          closeAllPopups={closeAllPopups}
+          // onBlur={(e) => {
+          //   console.log("Triggered because this input lost focus");
+          // }}
+        
         >
           <input
             id="image-link-input"
@@ -78,7 +83,9 @@ export function App() {
           title="Edit profile"
           message="Save"
           isOpen={isEditProfilePopupOpen}
-          onClose={closeAllPopups}
+          closeAllPopups={closeAllPopups}
+          onBlur={closeAllPopups}
+        
         >
           <input
             id="name-input"
@@ -119,7 +126,8 @@ export function App() {
           title="New place"
           message="Create"
           isOpen={isAddPlacePopupOpen}
-          onClose={closeAllPopups}
+          closeAllPopups={closeAllPopups}
+          onBlur={closeAllPopups}
         >
           <input
             id="card-title-input"

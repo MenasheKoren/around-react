@@ -1,4 +1,10 @@
-export const PopupWithForm = ({ name, title, children, isOpen, closeAllPopups }) => {
+export const PopupWithForm = ({
+                                name,
+                                title,
+                                children,
+                                isOpen,
+                                closeAllPopups
+                              }) => {
   return (
     <>
       <section
@@ -7,14 +13,16 @@ export const PopupWithForm = ({ name, title, children, isOpen, closeAllPopups })
           isOpen ? "popup_opened" : ""
         ].join(" ")}
       >
-        <div className="popup__container">
+        <div
+          className="popup__container"
+          onBlur={(e) => {
+            console.log("Triggered because this input lost focus");
+          }}
+        >
           <button
             className="popup__close button button_hover_dark"
             type="button"
-            onClick={console.log("123")}
-            onClose={console.log("123")}
             onClick={closeAllPopups}
-            onClose={closeAllPopups}
           />
           <h2 className="popup__title">{title}</h2>
           {children}
