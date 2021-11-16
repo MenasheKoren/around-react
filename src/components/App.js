@@ -4,7 +4,7 @@ import { Main } from "./Main";
 import { Footer } from "./Footer";
 import { PopupWithForm } from "./PopupWithForm";
 import { PopupWithImage } from "./PopupWithImage";
-import React, { useState } from "react";
+import React from "react";
 
 export function App() {
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] =
@@ -14,22 +14,28 @@ export function App() {
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
   
   function handleEditAvatarClick() {
-    setIsEditAvatarPopupOpen(!isEditAvatarPopupOpen);
+    setIsEditAvatarPopupOpen(true);
   }
   
   function handleEditProfileClick() {
-    setIsEditProfilePopupOpen(!isEditProfilePopupOpen);
+    setIsEditProfilePopupOpen(true);
   }
   
   function handleAddPlaceClick() {
-    setIsAddPlacePopupOpen(!isAddPlacePopupOpen);
+    setIsAddPlacePopupOpen(true);
   }
   
-  function closeAllPopups() {
-    setIsEditAvatarPopupOpen(!isEditAvatarPopupOpen);
-    setIsEditProfilePopupOpen(!isEditProfilePopupOpen);
-    setIsAddPlacePopupOpen(!isAddPlacePopupOpen);
-  }
+  const closeAllPopups = () => {
+    /*if (
+      evt.key === "Escape" ||
+      evt.target.classList.contains("popup__close") ||
+      !evt.target.closest(".popup__container")
+    ) {*/
+    setIsEditAvatarPopupOpen(false);
+    setIsEditProfilePopupOpen(false);
+    setIsAddPlacePopupOpen(false);
+    // }
+  };
   
   return (
     <div className="page">
@@ -151,7 +157,6 @@ export function App() {
           title="Are you sure?"
           message="Yes"
           isOpen={false}
-        
         >
           <button
             className="popup__save popup__save_type_remove-card button button_hover_darker"
