@@ -1,22 +1,36 @@
 import cousteau from "../images/cousteau.jpg";
 import edit from "../images/edit.svg";
-import React from "react";
+import React, { useEffect } from "react";
 import { api } from "../utils/api";
 
 export function Main(props) {
-  const [isUserName, setIsUserName] = React.useState("Jacques Cousteau");
-  const [isUserDescription, setIsUserDescription] = React.useState("Explorer");
-  const [isUserAvatar, setIsUserAvatar] = React.useState(cousteau);
+  const [isUserName, setIsUserName] = React.useState(userName);
+  const [isUserDescription, setIsUserDescription] = React.useState(userDescription);
+  const [isUserAvatar, setIsUserAvatar] = React.useState(userAvatar);
   
-  const userInfoApi = (data) => {
-    api
-      .getUserInfo(data)
-      .then(console.log(`data: `, data))
-      .catch((err) => {
-        console.log(`Error.....: ${err}`);
-      });
-  };
-  userInfoApi();
+  let userId;
+  let userInfo;
+  let cardList;
+  useEffect(() => {
+    Promise.all([api.getInitialCards(), api.getUserInfo()])
+      .then(([cardData, userData]) => {
+        userId = userData._id;
+        cardList/*.renderer*/(cardData);
+        userInfo/*.setUserInfo*/({
+        ({ userName })
+      :
+        userData.name,
+          ({ userDescription });
+      :
+        userData.about,
+          ({ userAvatar });
+      :
+        userData.avatar;
+      })
+      
+      })
+      .catch((err) => console.log(`Error.....: ${err}`));
+  }, []);
   
   function handleSetUserName() {
     setIsUserName("");
@@ -69,7 +83,22 @@ export function Main(props) {
       </section>
       
       <section className=" cards">
-        <ul className=" card-list" />
+        <ul className=" card-list">
+          <li className="card">
+            <button className="card__remove button button_hover_dark"></button>
+            <img className="card__image" src="#" alt="#" />
+            <div className="card__caption">
+              <h3 className="card__location ellipses"></h3>
+              <div className="likes-container">
+                <button
+                  className="card__like button button_empty button_hover_light"
+                  type="button"
+                ></button>
+                <span className="card__likes-count"></span>
+              </div>
+            </div>
+          </li>
+        </ul>
       </section>
     </main>
   );
