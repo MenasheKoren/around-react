@@ -4,30 +4,19 @@ import React, { useEffect } from "react";
 import { api } from "../utils/api";
 
 export function Main(props) {
-  const [isUserName, setIsUserName] = React.useState(userName);
-  const [isUserDescription, setIsUserDescription] = React.useState(userDescription);
-  const [isUserAvatar, setIsUserAvatar] = React.useState(userAvatar);
+  const [isUserName, setIsUserName] = React.useState("Jacques Cousteau");
+  const [isUserDescription, setIsUserDescription] = React.useState("Explorer");
+  const [isUserAvatar, setIsUserAvatar] = React.useState(cousteau);
   
   let userId;
-  let userInfo;
   let cardList;
   useEffect(() => {
     Promise.all([api.getInitialCards(), api.getUserInfo()])
       .then(([cardData, userData]) => {
         userId = userData._id;
-        cardList/*.renderer*/(cardData);
-        userInfo/*.setUserInfo*/({
-        ({ userName })
-      :
-        userData.name,
-          ({ userDescription });
-      :
-        userData.about,
-          ({ userAvatar });
-      :
-        userData.avatar;
-      })
-      
+        setIsUserName(userData.name);
+        setIsUserDescription(userData.about);
+        setIsUserAvatar(userData.avatar);
       })
       .catch((err) => console.log(`Error.....: ${err}`));
   }, []);
@@ -85,16 +74,16 @@ export function Main(props) {
       <section className=" cards">
         <ul className=" card-list">
           <li className="card">
-            <button className="card__remove button button_hover_dark"></button>
+            <button className="card__remove button button_hover_dark" />
             <img className="card__image" src="#" alt="#" />
             <div className="card__caption">
-              <h3 className="card__location ellipses"></h3>
+              <h3 className="card__location ellipses" />
               <div className="likes-container">
                 <button
                   className="card__like button button_empty button_hover_light"
                   type="button"
-                ></button>
-                <span className="card__likes-count"></span>
+                />
+                <span className="card__likes-count" />
               </div>
             </div>
           </li>
