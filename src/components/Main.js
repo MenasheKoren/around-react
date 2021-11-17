@@ -4,9 +4,31 @@ import React from "react";
 import { api } from "../utils/api";
 
 export function Main(props) {
-  const [isUserName, setIsUserName] = React.useState();
-  const [isUserDescription, setIsUserDescription] = React.useState();
-  const [isUserAvatar, setIsUserAvatar] = React.useState();
+  const [isUserName, setIsUserName] = React.useState("Jacques Cousteau");
+  const [isUserDescription, setIsUserDescription] = React.useState("Explorer");
+  const [isUserAvatar, setIsUserAvatar] = React.useState(cousteau);
+  
+  const userInfoApi = (data) => {
+    api
+      .getUserInfo(data)
+      .then(console.log(`data: `, data))
+      .catch((err) => {
+        console.log(`Error.....: ${err}`);
+      });
+  };
+  userInfoApi();
+  
+  function handleSetUserName() {
+    setIsUserName("");
+  }
+  
+  function handleSetUserDescription() {
+    setIsUserDescription("");
+  }
+  
+  function handleSetUserAvatar() {
+    setIsUserAvatar("");
+  }
   
   return (
     <main className="main">
@@ -14,7 +36,7 @@ export function Main(props) {
         <div className="avatar">
           <img
             className="avatar__image"
-            src={cousteau}
+            src={isUserAvatar}
             alt="Jacques Cousteau smiling on the sea"
           />
           <img
@@ -27,14 +49,16 @@ export function Main(props) {
         <div className=" profile-info">
           <div className=" profile-info__name">
             <div className=" profile-info__edit">
-              <h1 className=" edit-name ellipses">Jacques Cousteau</h1>
+              <h1 className=" edit-name ellipses">{isUserName}</h1>
               <button
                 onClick={props.onEditProfileClick}
                 className=" edit-button button button_hover_dark"
                 type=" button"
               />
             </div>
-            <p className=" profile-info__profession ellipses">Explorer</p>
+            <p className=" profile-info__profession ellipses">
+              {isUserDescription}
+            </p>
           </div>
           <button
             onClick={props.onAddPlaceClick}
