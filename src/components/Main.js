@@ -17,15 +17,15 @@ export function Main(props) {
   useEffect(() => {
     Promise.all([api.getInitialCards(), api.getUserInfo()])
       .then(([cardData, userData]) => {
-        console.log([cardData]);
+        console.log([cardData[0]]);
         userId = userData._id;
         setIsUserName(userData.name);
         setIsUserDescription(userData.about);
         setIsUserAvatar(userData.avatar);
-        setIsCardList([...cardData]);
-        setIsCardTitle([cardData.title]);
-        setIsCardLink([cardData.link]);
-        setIsLikesCount([cardData.likes].length);
+        // setIsCardList([...cardData]);
+        setIsCardTitle([cardData[0].name]);
+        setIsCardLink([cardData[0].link]);
+        setIsLikesCount([cardData[0].likes].length);
       })
       .catch((err) => console.log(`Error.....: ${err}`));
   }, []);
@@ -84,27 +84,7 @@ export function Main(props) {
         cardTitle={isCardTitle}
         cardLink={isCardLink}
         likesCount={isLikesCount}
-        cardList={isCardList}
-      >
-        cardList.map(card =>
-        {
-          <li className="card">
-            <button className="card__remove button button_hover_dark" />
-            <img className="card__image" src={cardLink} alt={cardTitle} />
-            <div className="card__caption">
-              <h3 className="card__location ellipses">{cardTitle}</h3>
-              <div className="likes-container">
-                <button
-                  className="card__like button button_empty button_hover_light"
-                  type="button"
-                />
-                <span className="card__likes-count">{likesCount}</span>
-              </div>
-            </div>
-          </li>
-        }
-        )
-      </Card>
+      />
     </main>
   );
 }
