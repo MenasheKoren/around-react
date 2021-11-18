@@ -5,26 +5,21 @@ import { api } from "../utils/api";
 import { Card } from "./Card";
 
 export function Main(props) {
-  const [isUserId, setIsUserId] = React.useState("");
+  // const [isUserId, setIsUserId] = React.useState("");
   const [isUserName, setIsUserName] = React.useState("Jacques Cousteau");
   const [isUserDescription, setIsUserDescription] = React.useState("Explorer");
   const [isUserAvatar, setIsUserAvatar] = React.useState(cousteau);
-  const [isCardTitle, setIsCardTitle] = React.useState([]);
-  const [isCardLink, setIsCardLink] = React.useState([]);
-  const [isLikesCount, setIsLikesCount] = React.useState([0]);
+  
   const [isCardList, setIsCardList] = React.useState([]);
   
   useEffect(() => {
     Promise.all([api.getInitialCards(), api.getUserInfo()])
       .then(([cardData, userData]) => {
-        setIsUserId(userData._id);
+        // setIsUserId(userData._id);
         setIsUserName(userData.name);
         setIsUserDescription(userData.about);
         setIsUserAvatar(userData.avatar);
         setIsCardList([...cardData]);
-        setIsCardTitle([cardData.name]);
-        setIsCardLink([cardData.link]);
-        setIsLikesCount([cardData.likes].length);
       })
       .catch((err) => console.log(`Error.....: ${err}`));
   }, []);
@@ -81,13 +76,13 @@ export function Main(props) {
       
       <section className="cards">
         <ul className="card-list">
-          {isCardList.map((card) => {
+          {isCardList.map((card, index) => {
             return (
               <Card
-                cardTitle={isCardTitle}
-                cardLink={isCardLink}
-                likesCount={isLikesCount}
-                key={isCardList._id}
+                title={card.name}
+                link={card.link}
+                likes={card.likes.length}
+                key={index}
               />
             );
           })}
