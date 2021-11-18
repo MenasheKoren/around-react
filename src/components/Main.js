@@ -2,26 +2,35 @@ import cousteau from "../images/cousteau.jpg";
 import edit from "../images/edit.svg";
 import React, { useEffect } from "react";
 import { api } from "../utils/api";
+import { Card } from "./Card";
 
 export function Main(props) {
   const [isUserName, setIsUserName] = React.useState("Jacques Cousteau");
   const [isUserDescription, setIsUserDescription] = React.useState("Explorer");
   const [isUserAvatar, setIsUserAvatar] = React.useState(cousteau);
+  const [isCardTitle, setIsCardTitle] = React.useState([]);
+  const [isCardLink, setIsCardLink] = React.useState([]);
+  const [isLikesCount, setIsLikesCount] = React.useState([0]);
+  const [isCardList, setIsCardList] = React.useState([]);
   
   let userId;
-  let cardList;
   useEffect(() => {
     Promise.all([api.getInitialCards(), api.getUserInfo()])
       .then(([cardData, userData]) => {
+        console.log([cardData]);
         userId = userData._id;
         setIsUserName(userData.name);
         setIsUserDescription(userData.about);
         setIsUserAvatar(userData.avatar);
+        setIsCardList([...isCardList, cardData.card]);
+        setIsCardTitle([cardData.title]);
+        setIsCardLink([cardData.link]);
+        setIsLikesCount([cardData.likes].length);
       })
       .catch((err) => console.log(`Error.....: ${err}`));
   }, []);
   
-  function handleSetUserName() {
+  /*function handleSetUserName() {
     setIsUserName("");
   }
   
@@ -31,7 +40,7 @@ export function Main(props) {
   
   function handleSetUserAvatar() {
     setIsUserAvatar("");
-  }
+  }*/
   
   return (
     <main className="main">
@@ -70,25 +79,16 @@ export function Main(props) {
           />
         </div>
       </section>
-      
-      <section className=" cards">
-        <ul className=" card-list">
-          <li className="card">
-            <button className="card__remove button button_hover_dark" />
-            <img className="card__image" src="#" alt="#" />
-            <div className="card__caption">
-              <h3 className="card__location ellipses" />
-              <div className="likes-container">
-                <button
-                  className="card__like button button_empty button_hover_light"
-                  type="button"
-                />
-                <span className="card__likes-count" />
-              </div>
-            </div>
-          </li>
+      <Card
+        cardList={isCardList}
+        cardTitle={isCardTitle}
+        cardLink={isCardLink}
+        likesCount={isLikesCount}
+      >
+        <ul className="card-list">
+          cardList.map(card => {<li className="card" />})
         </ul>
-      </section>
+      </Card>
     </main>
   );
 }
