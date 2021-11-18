@@ -5,6 +5,7 @@ import { api } from "../utils/api";
 import { Card } from "./Card";
 
 export function Main(props) {
+  const [isUserId, setIsUserId] = React.useState("");
   const [isUserName, setIsUserName] = React.useState("Jacques Cousteau");
   const [isUserDescription, setIsUserDescription] = React.useState("Explorer");
   const [isUserAvatar, setIsUserAvatar] = React.useState(cousteau);
@@ -13,19 +14,17 @@ export function Main(props) {
   const [isLikesCount, setIsLikesCount] = React.useState([0]);
   const [isCardList, setIsCardList] = React.useState([]);
   
-  let userId;
   useEffect(() => {
     Promise.all([api.getInitialCards(), api.getUserInfo()])
       .then(([cardData, userData]) => {
-        console.log([cardData[0]]);
-        userId = userData._id;
+        setIsUserId(userData._id);
         setIsUserName(userData.name);
         setIsUserDescription(userData.about);
         setIsUserAvatar(userData.avatar);
-        // setIsCardList([...cardData]);
-        setIsCardTitle([cardData[0].name]);
-        setIsCardLink([cardData[0].link]);
-        setIsLikesCount([cardData[0].likes].length);
+        setIsCardList([...cardData]);
+        setIsCardTitle([cardData.name]);
+        setIsCardLink([cardData.link]);
+        setIsLikesCount([cardData.likes].length);
       })
       .catch((err) => console.log(`Error.....: ${err}`));
   }, []);
@@ -80,11 +79,20 @@ export function Main(props) {
         </div>
       </section>
       
-      <Card
-        cardTitle={isCardTitle}
-        cardLink={isCardLink}
-        likesCount={isLikesCount}
-      />
+      <section className="cards">
+        <ul className="card-list">
+          {isCardList.map((card) => {
+            return (
+              <Card
+                cardTitle={isCardTitle}
+                cardLink={isCardLink}
+                likesCount={isLikesCount}
+                key={isCardList._id}
+              />
+            );
+          })}
+        </ul>
+      </section>
     </main>
   );
 }
