@@ -5,17 +5,14 @@ import { api } from "../utils/api";
 import { Card } from "./Card";
 
 export function Main(props) {
-  // const [isUserId, setIsUserId] = React.useState("");
   const [isUserName, setIsUserName] = React.useState("Jacques Cousteau");
   const [isUserDescription, setIsUserDescription] = React.useState("Explorer");
   const [isUserAvatar, setIsUserAvatar] = React.useState(cousteau);
-  
   const [isCardList, setIsCardList] = React.useState([]);
   
   useEffect(() => {
     Promise.all([api.getInitialCards(), api.getUserInfo()])
       .then(([cardData, userData]) => {
-        // setIsUserId(userData._id);
         setIsUserName(userData.name);
         setIsUserDescription(userData.about);
         setIsUserAvatar(userData.avatar);
@@ -23,18 +20,6 @@ export function Main(props) {
       })
       .catch((err) => console.log(`Error.....: ${err}`));
   }, []);
-  
-  /*function handleSetUserName() {
-    setIsUserName("");
-  }
-  
-  function handleSetUserDescription() {
-    setIsUserDescription("");
-  }
-  
-  function handleSetUserAvatar() {
-    setIsUserAvatar("");
-  }*/
   
   return (
     <main className="main">
@@ -83,6 +68,7 @@ export function Main(props) {
                 link={card.link}
                 likes={card.likes.length}
                 key={index}
+                onCardClick={props.onCardClick}
               />
             );
           })}

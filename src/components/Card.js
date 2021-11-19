@@ -1,10 +1,19 @@
 import React from "react";
 
-export const Card = ({ title, link, likes }) => {
+export const Card = ({ title, link, likes, props }) => {
+  function handleClick() {
+    props.onCardClick(props.card);
+  }
+  
   return (
     <li className="card">
       <button className="card__remove button button_hover_dark" />
-      <img className="card__image" src={link} alt={title} />
+      <img
+        className="card__image"
+        src={link}
+        alt={title}
+        onClick={handleClick}
+      />
       <div className="card__caption">
         <h3 className="card__location ellipses">{title}</h3>
         <div className="likes-container">

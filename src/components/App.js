@@ -14,6 +14,11 @@ export function App() {
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
   const [isDeletePlacePopupOpen, setIsDeletePlacePopupOpen] =
     React.useState(false);
+  const [isSelectedCard, setIsSelectedCard] = React.useState(false);
+  
+  function handleCardClick() {
+    setIsSelectedCard(!isSelectedCard);
+  }
   
   function handleEditAvatarClick() {
     setIsEditAvatarPopupOpen(true);
@@ -46,7 +51,7 @@ export function App() {
           onEditAvatarClick={handleEditAvatarClick}
           onEditProfileClick={handleEditProfileClick}
           onAddPlaceClick={handleAddPlaceClick}
-          onCardClick={ImagePopup}
+          onCardClick={handleCardClick}
           onDeletePlaceClick={handleDeletePlaceClick}
         />
         <Footer />
@@ -168,7 +173,11 @@ export function App() {
             Yes
           </button>
         </PopupWithForm>
-        <ImagePopup />
+        <ImagePopup
+          onCardClick={handleCardClick}
+          closeAllPopups={closeAllPopups}
+          isSelectedCard={isSelectedCard}
+        />
       </div>
     </div>
   );
