@@ -68,7 +68,8 @@ export function Main(props) {
                 link={card.link}
                 likes={card.likes.length}
                 key={index}
-                onCardClick={props.onCardClick}
+                onCardClick={props.handleCardClick}
+                isSelectedCard={props.isSelectedCard}
               />
             );
           })}

@@ -2,7 +2,8 @@ import React from "react";
 
 export const Card = ({ title, link, likes, props }) => {
   function handleClick() {
-    props.onCardClick(props.card);
+    console.log(props);
+    // props.onCardClick(props.card);
   }
   
   return (
