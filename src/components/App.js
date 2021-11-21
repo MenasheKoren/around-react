@@ -17,7 +17,7 @@ export function App() {
   const [isSelectedCard, setIsSelectedCard] = React.useState(false);
   
   function handleCardClick() {
-    setIsSelectedCard(true);
+    setIsSelectedCard(!isSelectedCard);
   }
   
   function handleEditAvatarClick() {
@@ -41,7 +41,6 @@ export function App() {
     setIsEditProfilePopupOpen(false);
     setIsAddPlacePopupOpen(false);
     setIsDeletePlacePopupOpen(false);
-    setIsSelectedCard(false);
   }
   
   return (
@@ -54,7 +53,6 @@ export function App() {
           onAddPlaceClick={handleAddPlaceClick}
           handleCardClick={handleCardClick}
           onDeletePlaceClick={handleDeletePlaceClick}
-          isSelectedCard={isSelectedCard}
         />
         <Footer />
         
@@ -177,7 +175,7 @@ export function App() {
         </PopupWithForm>
         <ImagePopup
           closeAllPopups={closeAllPopups}
-          // isSelectedCard={isSelectedCard}
+          isSelectedCard={isSelectedCard}
         />
       </div>
     </div>

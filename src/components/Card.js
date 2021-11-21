@@ -1,9 +1,8 @@
 import React from "react";
 
-export const Card = ({ title, link, likes, props }) => {
+export const Card = (props) => {
   function handleClick() {
-    console.log(props);
-    // props.onCardClick(props.card);
+    props.onCardClick(props.card);
   }
   
   return (
@@ -11,18 +10,18 @@ export const Card = ({ title, link, likes, props }) => {
       <button className="card__remove button button_hover_dark" />
       <img
         className="card__image"
-        src={link}
-        alt={title}
+        src={props.link}
+        alt={props.title}
         onClick={handleClick}
       />
       <div className="card__caption">
-        <h3 className="card__location ellipses">{title}</h3>
+        <h3 className="card__location ellipses">{props.title}</h3>
         <div className="likes-container">
           <button
             className="card__like button button_empty button_hover_light"
             type="button"
           />
-          <span className="card__likes-count">{likes}</span>
+          <span className="card__likes-count">{props.likes}</span>
         </div>
       </div>
     </li>
