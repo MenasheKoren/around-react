@@ -4,9 +4,10 @@ import { Main } from "./Main";
 import { Footer } from "./Footer";
 import { PopupWithForm } from "./PopupWithForm";
 import { ImagePopup } from "./ImagePopup";
+
 import React from "react";
 
-export function App() {
+export function App(props) {
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] =
     React.useState(false);
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] =
@@ -41,6 +42,7 @@ export function App() {
     setIsEditProfilePopupOpen(false);
     setIsAddPlacePopupOpen(false);
     setIsDeletePlacePopupOpen(false);
+    setIsSelectedCard(false);
   }
   
   return (
@@ -176,6 +178,8 @@ export function App() {
         <ImagePopup
           closeAllPopups={closeAllPopups}
           isSelectedCard={isSelectedCard}
+          title={props.name}
+          link={props.link}
         />
       </div>
     </div>
