@@ -1,3 +1,5 @@
+import React from "react";
+
 export const ImagePopup = (props) => {
   return (
     <>
@@ -14,12 +16,17 @@ export const ImagePopup = (props) => {
             onClick={props.closeAllPopups}
           />
           <figure className="popup__figure">
-            <img className="popup__image" src={props.isSelectedCard.link} alt={props.isSelectedCard.title} />
-            <figcaption className="popup__caption">{props.isSelectedCard.title}</figcaption>
+            <img
+              className="popup__image"
+              src={props.isSelectedCard.link}
+              alt={props.isSelectedCard.title}
+            />
+            <figcaption className="popup__caption">
+              {props.isSelectedCard.title}
+            </figcaption>
           </figure>
         </div>
       </section>
     </>
-  
   );
 };

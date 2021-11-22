@@ -7,7 +7,6 @@ import { ImagePopup } from "./ImagePopup";
 
 import React from "react";
 
-
 export function App() {
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] =
     React.useState(false);
@@ -81,7 +80,7 @@ export function App() {
           <button
             className="popup__save button button_hover_darker"
             type="submit"
-            // disabled
+            disabled
           >
             Save
           </button>
@@ -122,7 +121,7 @@ export function App() {
           <button
             className="popup__save button button_hover_darker"
             type="submit"
-            // disabled
+            disabled
           >
             Save
           </button>
@@ -160,7 +159,7 @@ export function App() {
           <button
             className="popup__save button button_hover_darker"
             type="submit"
-            // disabled
+            disabled
           >
             Create
           </button>

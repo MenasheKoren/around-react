@@ -65,9 +65,6 @@ export function Main(props) {
             return (
               <Card
                 card={card}
-                title={card.name}
-                link={card.link}
-                likes={card.likes.length}
                 key={index}
                 onCardClick={props.handleCardClick}
               />

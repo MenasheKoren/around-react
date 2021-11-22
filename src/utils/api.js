@@ -1,3 +1,5 @@
+// import React from "react";
+
 class Api {
   constructor({ baseUrl, headers }) {
     this._baseUrl = baseUrl;
@@ -13,53 +15,6 @@ class Api {
   getUserInfo() {
     return customFetch(`${this._baseUrl}/users/me`, {
       headers: this._headers
-    });
-  }
-  
-  editUserInfo(data) {
-    return customFetch(`${this._baseUrl}/users/me`, {
-      headers: this._headers,
-      method: "PATCH",
-      body: JSON.stringify(data)
-    });
-  }
-  
-  editAvatar(data) {
-    return customFetch(`${this._baseUrl}/users/me/avatar`, {
-      headers: this._headers,
-      method: "PATCH",
-      body: JSON.stringify({
-        avatar: data
-      })
-    });
-  }
-  
-  createCard(data) {
-    return customFetch(`${this._baseUrl}/cards`, {
-      headers: this._headers,
-      method: "POST",
-      body: JSON.stringify(data)
-    });
-  }
-  
-  deleteCard(cardId) {
-    return customFetch(`${this._baseUrl}/cards/${cardId}`, {
-      headers: this._headers,
-      method: "DELETE"
-    });
-  }
-  
-  addLikes(cardId) {
-    return customFetch(`${this._baseUrl}/cards/likes/${cardId}`, {
-      headers: this._headers,
-      method: "PUT"
-    });
-  }
-  
-  removeLikes(cardId) {
-    return customFetch(`${this._baseUrl}/cards/likes/${cardId}`, {
-      headers: this._headers,
-      method: "DELETE"
     });
   }
 }
