@@ -1,5 +1,3 @@
-// import React from "react";
-
 class Api {
   constructor({ baseUrl, headers }) {
     this._baseUrl = baseUrl;
@@ -24,10 +22,12 @@ const customFetch = (url, headers) =>
     res.ok ? res.json() : Promise.reject(res.statusText)
   );
 
-export const api = new Api({
+const api = new Api({
   baseUrl: "https://around.nomoreparties.co/v1/group-12",
   headers: {
     authorization: "a422b90c-eef7-4772-9177-7c895e07d221",
     "Content-Type": "application/json"
   }
 });
+
+export default api;

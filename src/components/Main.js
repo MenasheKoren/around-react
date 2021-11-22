@@ -1,10 +1,10 @@
 import cousteau from "../images/cousteau.jpg";
 import edit from "../images/edit.svg";
 import React, { useEffect } from "react";
-import { api } from "../utils/api";
-import { Card } from "./Card";
+import api from "../utils/api";
+import Card from "./Card";
 
-export function Main(props) {
+function Main(props) {
   const [isUserName, setIsUserName] = React.useState("Jacques Cousteau");
   const [isUserDescription, setIsUserDescription] = React.useState("Explorer");
   const [isUserAvatar, setIsUserAvatar] = React.useState(cousteau);
@@ -75,3 +75,5 @@ export function Main(props) {
     </main>
   );
 }
+
+export default Main;

@@ -1,6 +1,6 @@
 import React from "react";
 
-export const Card = (props) => {
+function Card(props) {
   function handleClick() {
     props.onCardClick(props.card);
   }
@@ -26,4 +26,6 @@ export const Card = (props) => {
       </div>
     </li>
   );
-};
+}
+
+export default Card;

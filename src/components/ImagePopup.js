@@ -1,6 +1,6 @@
 import React from "react";
 
-export const ImagePopup = (props) => {
+const ImagePopup = (props) => {
   return (
     <>
       <section
@@ -30,3 +30,5 @@ export const ImagePopup = (props) => {
     </>
   );
 };
+
+export default ImagePopup;
