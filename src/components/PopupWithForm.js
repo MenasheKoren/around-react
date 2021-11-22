@@ -1,12 +1,6 @@
 import React from "react";
 
-export const PopupWithForm = ({
-                                name,
-                                title,
-                                children,
-                                isOpen,
-                                closeAllPopups
-                              }) => {
+const PopupWithForm = ({ name, title, children, isOpen, closeAllPopups }) => {
   return (
     <section
       className={[
@@ -26,3 +20,5 @@ export const PopupWithForm = ({
     </section>
   );
 };
+
+export default PopupWithForm;
