@@ -7,7 +7,8 @@ import { ImagePopup } from "./ImagePopup";
 
 import React from "react";
 
-export function App(props) {
+
+export function App() {
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] =
     React.useState(false);
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] =
@@ -17,8 +18,11 @@ export function App(props) {
     React.useState(false);
   const [isSelectedCard, setIsSelectedCard] = React.useState(false);
   
-  function handleCardClick() {
-    setIsSelectedCard(!isSelectedCard);
+  function handleCardClick({ link, name }) {
+    setIsSelectedCard({
+      title: name,
+      link: link
+    });
   }
   
   function handleEditAvatarClick() {
@@ -178,8 +182,6 @@ export function App(props) {
         <ImagePopup
           closeAllPopups={closeAllPopups}
           isSelectedCard={isSelectedCard}
-          title={props.name}
-          link={props.link}
         />
       </div>
     </div>

@@ -1,8 +1,10 @@
 import React from "react";
 
 export const Card = (props) => {
+  
   function handleClick() {
     props.onCardClick(props.card);
+    
   }
   
   return (
