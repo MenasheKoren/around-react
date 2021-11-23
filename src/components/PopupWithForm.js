@@ -1,6 +1,13 @@
 import React from "react";
 
-const PopupWithForm = ({ name, title, children, isOpen, closeAllPopups }) => {
+const PopupWithForm = ({
+                         name,
+                         title,
+                         children,
+                         isOpen,
+                         closeAllPopups,
+                         buttonText
+                       }) => {
   return (
     <section
       className={[
@@ -15,7 +22,16 @@ const PopupWithForm = ({ name, title, children, isOpen, closeAllPopups }) => {
           onClick={closeAllPopups}
         />
         <h2 className="popup__title">{title}</h2>
-        <form className="popup__form">{children}</form>
+        <form className="popup__form">
+          {children}
+          <button
+            className="popup__save button button_hover_darker"
+            type="submit"
+            disabled
+          >
+            {buttonText}
+          </button>
+        </form>
       </div>
     </section>
   );

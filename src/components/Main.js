@@ -5,18 +5,18 @@ import api from "../utils/api";
 import Card from "./Card";
 
 function Main(props) {
-  const [isUserName, setIsUserName] = React.useState("Jacques Cousteau");
-  const [isUserDescription, setIsUserDescription] = React.useState("Explorer");
-  const [isUserAvatar, setIsUserAvatar] = React.useState(cousteau);
-  const [isCardList, setIsCardList] = React.useState([]);
+  const [userName, setUserName] = React.useState("Jacques Cousteau");
+  const [userDescription, setUserDescription] = React.useState("Explorer");
+  const [userAvatar, setUserAvatar] = React.useState(cousteau);
+  const [cardList, setCardList] = React.useState([]);
   
   useEffect(() => {
     Promise.all([api.getInitialCards(), api.getUserInfo()])
       .then(([cardData, userData]) => {
-        setIsUserName(userData.name);
-        setIsUserDescription(userData.about);
-        setIsUserAvatar(userData.avatar);
-        setIsCardList([...cardData]);
+        setUserName(userData.name);
+        setUserDescription(userData.about);
+        setUserAvatar(userData.avatar);
+        setCardList([...cardData]);
       })
       .catch((err) => console.log(`Error.....: ${err}`));
   }, []);
@@ -27,7 +27,7 @@ function Main(props) {
         <div className="avatar">
           <img
             className="avatar__image"
-            src={isUserAvatar}
+            src={userAvatar}
             alt="Jacques Cousteau smiling on the sea"
           />
           <img
@@ -40,7 +40,7 @@ function Main(props) {
         <div className=" profile-info">
           <div className=" profile-info__name">
             <div className=" profile-info__edit">
-              <h1 className=" edit-name ellipses">{isUserName}</h1>
+              <h1 className=" edit-name ellipses">{userName}</h1>
               <button
                 onClick={props.onEditProfileClick}
                 className=" edit-button button button_hover_dark"
@@ -48,7 +48,7 @@ function Main(props) {
               />
             </div>
             <p className=" profile-info__profession ellipses">
-              {isUserDescription}
+              {userDescription}
             </p>
           </div>
           <button
@@ -61,11 +61,11 @@ function Main(props) {
       
       <section className="cards">
         <ul className="card-list">
-          {isCardList.map((card, index) => {
+          {cardList.map((card) => {
             return (
               <Card
                 card={card}
-                key={index}
+                key={card._id}
                 onCardClick={props.handleCardClick}
               />
             );

@@ -15,10 +15,12 @@ function App() {
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
   const [isDeletePlacePopupOpen, setIsDeletePlacePopupOpen] =
     React.useState(false);
-  const [isSelectedCard, setIsSelectedCard] = React.useState(false);
+  const [isImagePopupOpen, setIsImagePopupOpen] = React.useState(false);
+  const [selectedCardData, setSelectedCardData] = React.useState({});
   
   function handleCardClick({ link, name }) {
-    setIsSelectedCard({
+    setIsImagePopupOpen(true);
+    setSelectedCardData({
       title: name,
       link: link
     });
@@ -45,7 +47,8 @@ function App() {
     setIsEditProfilePopupOpen(false);
     setIsAddPlacePopupOpen(false);
     setIsDeletePlacePopupOpen(false);
-    setIsSelectedCard(false);
+    setIsImagePopupOpen(false);
+    setSelectedCardData({});
   }
   
   return (
@@ -64,7 +67,7 @@ function App() {
         <PopupWithForm
           name="edit-avatar"
           title="Update profile picture"
-          message="Save"
+          buttonText="Save"
           isOpen={isEditAvatarPopupOpen}
           closeAllPopups={closeAllPopups}
         >
@@ -77,18 +80,11 @@ function App() {
             required
           />
           <span className="error-message" id="image-link-input-error" />
-          <button
-            className="popup__save button button_hover_darker"
-            type="submit"
-            disabled
-          >
-            Save
-          </button>
         </PopupWithForm>
         <PopupWithForm
           name="edit-profile"
           title="Edit profile"
-          message="Save"
+          buttonText="Save"
           isOpen={isEditProfilePopupOpen}
           closeAllPopups={closeAllPopups}
         >
@@ -117,19 +113,11 @@ function App() {
             pattern=".*\S.*"
           />
           <span className="error-message" id="profession-input-error" />
-          
-          <button
-            className="popup__save button button_hover_darker"
-            type="submit"
-            disabled
-          >
-            Save
-          </button>
         </PopupWithForm>
         <PopupWithForm
           name="add-card"
           title="New place"
-          message="Create"
+          buttonText="Create"
           isOpen={isAddPlacePopupOpen}
           closeAllPopups={closeAllPopups}
         >
@@ -155,32 +143,18 @@ function App() {
             required
           />
           <span className="error-message" id="card-link-input-error" />
-          
-          <button
-            className="popup__save button button_hover_darker"
-            type="submit"
-            disabled
-          >
-            Create
-          </button>
         </PopupWithForm>
         <PopupWithForm
           name="remove-card"
           title="Are you sure?"
-          message="Yes"
+          buttonText="Yes"
           isOpen={isDeletePlacePopupOpen}
           closeAllPopups={closeAllPopups}
-        >
-          <button
-            className="popup__save popup__save_type_remove-card button button_hover_darker"
-            type="submit"
-          >
-            Yes
-          </button>
-        </PopupWithForm>
+        />
         <ImagePopup
           closeAllPopups={closeAllPopups}
-          isSelectedCard={isSelectedCard}
+          selectedCardData={selectedCardData}
+          isOpen={isImagePopupOpen}
         />
       </div>
     </div>
