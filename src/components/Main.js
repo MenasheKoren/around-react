@@ -16,7 +16,7 @@ function Main(props) {
         setUserName(userData.name);
         setUserDescription(userData.about);
         setUserAvatar(userData.avatar);
-        setCardList([...cardData]);
+        setCardList(cardData);
       })
       .catch((err) => console.log(`Error.....: ${err}`));
   }, []);
