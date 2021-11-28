@@ -7,7 +7,7 @@ import Footer from "./Footer";
 import PopupWithForm from "./PopupWithForm";
 import ImagePopup from "./ImagePopup";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import api from "../utils/api";
 
 function App() {
@@ -27,7 +27,7 @@ function App() {
     api
       .getUserInfo()
       .then((userData) => {
-        console.log(`userData: `, userData);
+        setCurrentUser(userData);
       })
       .catch((err) => console.log(`Error.....: ${err}`));
   }, []);
@@ -66,7 +66,7 @@ function App() {
   }
 
   return (
-    <CurrentUserContext.Provider>
+    <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
         <div className="content">
           <Header />

@@ -1,33 +1,30 @@
-import cousteau from "../images/cousteau.jpg";
-import edit from "../images/edit.svg";
 import React, { useEffect } from "react";
+import { CurrentUserContext } from "../contexts/CurrentUserContext";
+import edit from "../images/edit.svg";
+
 import api from "../utils/api";
 import Card from "./Card";
 
 function Main(props) {
-  const [userName, setUserName] = React.useState("Jacques Cousteau");
-  const [userDescription, setUserDescription] = React.useState("Explorer");
-  const [userAvatar, setUserAvatar] = React.useState(cousteau);
   const [cardList, setCardList] = React.useState([]);
-  
+  const currentUser = React.useContext(CurrentUserContext);
+
   useEffect(() => {
-    Promise.all([api.getInitialCards(), api.getUserInfo()])
-      .then(([cardData, userData]) => {
-        setUserName(userData.name);
-        setUserDescription(userData.about);
-        setUserAvatar(userData.avatar);
-        setCardList(cardData);
+    api
+      .getInitialCards()
+      .then((cardData) => {
+        setCardList([...cardData]);
       })
       .catch((err) => console.log(`Error.....: ${err}`));
   }, []);
-  
+
   return (
     <main className="main">
       <section className="profile">
         <div className="avatar">
           <img
             className="avatar__image"
-            src={userAvatar}
+            src={currentUser.avatar}
             alt="Jacques Cousteau smiling on the sea"
           />
           <img
@@ -40,7 +37,7 @@ function Main(props) {
         <div className=" profile-info">
           <div className=" profile-info__name">
             <div className=" profile-info__edit">
-              <h1 className=" edit-name ellipses">{userName}</h1>
+              <h1 className=" edit-name ellipses">{currentUser.name}</h1>
               <button
                 onClick={props.onEditProfileClick}
                 className=" edit-button button button_hover_dark"
@@ -48,7 +45,7 @@ function Main(props) {
               />
             </div>
             <p className=" profile-info__profession ellipses">
-              {userDescription}
+              {currentUser.about}
             </p>
           </div>
           <button
@@ -58,7 +55,7 @@ function Main(props) {
           />
         </div>
       </section>
-      
+
       <section className="cards">
         <ul className="card-list">
           {cardList.map((card) => {
