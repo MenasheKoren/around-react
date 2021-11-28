@@ -1,11 +1,14 @@
 import "../index.css";
+import { CurrentUserContext } from "../contexts/CurrentUserContext";
+
 import Header from "./Header";
 import Main from "./Main";
 import Footer from "./Footer";
 import PopupWithForm from "./PopupWithForm";
 import ImagePopup from "./ImagePopup";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
+import api from "../utils/api";
 
 function App() {
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] =
@@ -17,31 +20,42 @@ function App() {
     React.useState(false);
   const [isImagePopupOpen, setIsImagePopupOpen] = React.useState(false);
   const [selectedCardData, setSelectedCardData] = React.useState({});
-  
+
+  const [currentUser, setCurrentUser] = React.useState({});
+
+  useEffect(() => {
+    api
+      .getUserInfo()
+      .then((userData) => {
+        console.log(`userData: `, userData);
+      })
+      .catch((err) => console.log(`Error.....: ${err}`));
+  }, []);
+
   function handleCardClick({ link, name }) {
     setIsImagePopupOpen(true);
     setSelectedCardData({
       title: name,
-      link: link
+      link: link,
     });
   }
-  
+
   function handleEditAvatarClick() {
     setIsEditAvatarPopupOpen(true);
   }
-  
+
   function handleEditProfileClick() {
     setIsEditProfilePopupOpen(true);
   }
-  
+
   function handleAddPlaceClick() {
     setIsAddPlacePopupOpen(true);
   }
-  
+
   function handleDeletePlaceClick() {
     setIsDeletePlacePopupOpen(true);
   }
-  
+
   function closeAllPopups() {
     setIsEditAvatarPopupOpen(false);
     setIsEditProfilePopupOpen(false);
@@ -50,114 +64,116 @@ function App() {
     setIsImagePopupOpen(false);
     setSelectedCardData({});
   }
-  
+
   return (
-    <div className="page">
-      <div className="content">
-        <Header />
-        <Main
-          onEditAvatarClick={handleEditAvatarClick}
-          onEditProfileClick={handleEditProfileClick}
-          onAddPlaceClick={handleAddPlaceClick}
-          handleCardClick={handleCardClick}
-          onDeletePlaceClick={handleDeletePlaceClick}
-        />
-        <Footer />
-        
-        <PopupWithForm
-          name="edit-avatar"
-          title="Update profile picture"
-          buttonText="Save"
-          isOpen={isEditAvatarPopupOpen}
-          closeAllPopups={closeAllPopups}
-        >
-          <input
-            id="image-link-input"
-            className="field-input field-input_type_image-link"
-            name="image-link"
-            type="url"
-            placeholder="Image URL"
-            required
+    <CurrentUserContext.Provider>
+      <div className="page">
+        <div className="content">
+          <Header />
+          <Main
+            onEditAvatarClick={handleEditAvatarClick}
+            onEditProfileClick={handleEditProfileClick}
+            onAddPlaceClick={handleAddPlaceClick}
+            handleCardClick={handleCardClick}
+            onDeletePlaceClick={handleDeletePlaceClick}
           />
-          <span className="error-message" id="image-link-input-error" />
-        </PopupWithForm>
-        <PopupWithForm
-          name="edit-profile"
-          title="Edit profile"
-          buttonText="Save"
-          isOpen={isEditProfilePopupOpen}
-          closeAllPopups={closeAllPopups}
-        >
-          <input
-            id="name-input"
-            className="field-input field-input_type_name"
-            name="name"
-            type="text"
-            placeholder="Name"
-            required
-            minLength="2"
-            maxLength="40"
-            pattern=".*\S.*"
+          <Footer />
+
+          <PopupWithForm
+            name="edit-avatar"
+            title="Update profile picture"
+            buttonText="Save"
+            isOpen={isEditAvatarPopupOpen}
+            closeAllPopups={closeAllPopups}
+          >
+            <input
+              id="image-link-input"
+              className="field-input field-input_type_image-link"
+              name="image-link"
+              type="url"
+              placeholder="Image URL"
+              required
+            />
+            <span className="error-message" id="image-link-input-error" />
+          </PopupWithForm>
+          <PopupWithForm
+            name="edit-profile"
+            title="Edit profile"
+            buttonText="Save"
+            isOpen={isEditProfilePopupOpen}
+            closeAllPopups={closeAllPopups}
+          >
+            <input
+              id="name-input"
+              className="field-input field-input_type_name"
+              name="name"
+              type="text"
+              placeholder="Name"
+              required
+              minLength="2"
+              maxLength="40"
+              pattern=".*\S.*"
+            />
+            <span className="error-message" id="name-input-error" />
+
+            <input
+              id="profession-input"
+              className="field-input field-input_type_profession"
+              name="profession"
+              type="text"
+              placeholder="Profession"
+              required
+              minLength="2"
+              maxLength="200"
+              pattern=".*\S.*"
+            />
+            <span className="error-message" id="profession-input-error" />
+          </PopupWithForm>
+          <PopupWithForm
+            name="add-card"
+            title="New place"
+            buttonText="Create"
+            isOpen={isAddPlacePopupOpen}
+            closeAllPopups={closeAllPopups}
+          >
+            <input
+              id="card-title-input"
+              className="field-input field-input_type_card-title"
+              name="card-title"
+              type="text"
+              placeholder="Title"
+              required
+              minLength="1"
+              maxLength="30"
+              pattern=".*\S.*"
+            />
+            <span className="error-message" id="card-title-input-error" />
+
+            <input
+              id="card-link-input"
+              className="field-input field-input_type_card-link"
+              name="card-link"
+              type="url"
+              placeholder="Image URL"
+              required
+            />
+            <span className="error-message" id="card-link-input-error" />
+          </PopupWithForm>
+          <PopupWithForm
+            name="remove-card"
+            title="Are you sure?"
+            buttonText="Yes"
+            isOpen={isDeletePlacePopupOpen}
+            closeAllPopups={closeAllPopups}
           />
-          <span className="error-message" id="name-input-error" />
-          
-          <input
-            id="profession-input"
-            className="field-input field-input_type_profession"
-            name="profession"
-            type="text"
-            placeholder="Profession"
-            required
-            minLength="2"
-            maxLength="200"
-            pattern=".*\S.*"
+          <ImagePopup
+            closeAllPopups={closeAllPopups}
+            selectedCardData={selectedCardData}
+            isOpen={isImagePopupOpen}
           />
-          <span className="error-message" id="profession-input-error" />
-        </PopupWithForm>
-        <PopupWithForm
-          name="add-card"
-          title="New place"
-          buttonText="Create"
-          isOpen={isAddPlacePopupOpen}
-          closeAllPopups={closeAllPopups}
-        >
-          <input
-            id="card-title-input"
-            className="field-input field-input_type_card-title"
-            name="card-title"
-            type="text"
-            placeholder="Title"
-            required
-            minLength="1"
-            maxLength="30"
-            pattern=".*\S.*"
-          />
-          <span className="error-message" id="card-title-input-error" />
-          
-          <input
-            id="card-link-input"
-            className="field-input field-input_type_card-link"
-            name="card-link"
-            type="url"
-            placeholder="Image URL"
-            required
-          />
-          <span className="error-message" id="card-link-input-error" />
-        </PopupWithForm>
-        <PopupWithForm
-          name="remove-card"
-          title="Are you sure?"
-          buttonText="Yes"
-          isOpen={isDeletePlacePopupOpen}
-          closeAllPopups={closeAllPopups}
-        />
-        <ImagePopup
-          closeAllPopups={closeAllPopups}
-          selectedCardData={selectedCardData}
-          isOpen={isImagePopupOpen}
-        />
+        </div>
       </div>
-    </div>
+    </CurrentUserContext.Provider>
   );
 }
 
