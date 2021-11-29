@@ -16,17 +16,19 @@ function Card(props) {
   const isLiked = props.card.likes.some((i) => i._id === currentUser._id);
 
   // Create a variable which you then set in `className` for the like button
-  const cardLikeButtonClassName = `...`;
+  // const cardLikeButtonClassName = `...`;
 
   function handleClick() {
     props.onCardClick(props.card);
   }
 
+  function handleLikeClick() {
+    props.onCardLike(props.card);
+  }
+
   return (
     <li className="card">
-      {isOwn && (
-        <button className="card__remove button button_hover_dark" />
-      )}
+      {isOwn && <button className="card__remove button button_hover_dark" />}
       <img
         className="card__image"
         src={props.card.link}
@@ -37,12 +39,15 @@ function Card(props) {
         <h3 className="card__location ellipses">{props.card.name}</h3>
         <div className="likes-container">
           <button
-            className="card__like button button_empty button_hover_light"
+            className={[
+              "card__like button button_hover_light",
+              isLiked ? "button_filled" : "button_empty",
+            ].join(" ")}
             type="button"
+            onClick={handleLikeClick}
           />
-          <span className={cardLikeButtonClassName}>
-            {props.card.likes.length}
-          </span>
+
+          <span className="card__likes-count">{props.card.likes.length}</span>
         </div>
       </div>
     </li>

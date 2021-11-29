@@ -18,6 +18,31 @@ function Main(props) {
       .catch((err) => console.log(`Error.....: ${err}`));
   }, []);
 
+  function handleCardLike(card) {
+    // Check one more time if this card was already liked
+    const isLiked = card.likes.some((i) => i._id === currentUser._id);
+    if (!isLiked) {
+      api
+        .addLikes(card._id, !isLiked)
+        .then((newCard) => {
+          setCardList((state) =>
+            state.map((c) => (c._id === card._id ? newCard : c))
+          );
+        })
+        .catch((err) => console.log(`Error.....: ${err}`));
+    } else {
+      api
+        .removeLikes(card._id, isLiked)
+        .then((newCard) => {
+          setCardList((state) =>
+            state.map((c) => (c._id === card._id ? newCard : c))
+          );
+        })
+        .catch((err) => console.log(`Error.....: ${err}`));
+    }
+    // Send a request to the API and getting the updated card data
+  }
+
   return (
     <main className="main">
       <section className="profile">
@@ -64,6 +89,7 @@ function Main(props) {
                 card={card}
                 key={card._id}
                 onCardClick={props.handleCardClick}
+                onCardLike={handleCardLike}
               />
             );
           })}
