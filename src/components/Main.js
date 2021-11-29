@@ -19,7 +19,6 @@ function Main(props) {
   }, []);
 
   function handleCardLike(card) {
-    // Check one more time if this card was already liked
     const isLiked = card.likes.some((i) => i._id === currentUser._id);
     if (!isLiked) {
       api
@@ -40,7 +39,16 @@ function Main(props) {
         })
         .catch((err) => console.log(`Error.....: ${err}`));
     }
-    // Send a request to the API and getting the updated card data
+  }
+
+  function handleDeleteCard(card) {
+    api
+      .deleteCard(card._id) /* Deletes the card with the matching ID */
+      .then(()=>{
+        const deletedCardID = card._id
+        setCardList(cardList.filter(card => card._id !== deletedCardID))
+      })
+      .catch((err) => console.log(`Error.....: ${err}`));
   }
 
   return (
@@ -90,6 +98,7 @@ function Main(props) {
                 key={card._id}
                 onCardClick={props.handleCardClick}
                 onCardLike={handleCardLike}
+                onCardDelete={handleDeleteCard}
               />
             );
           })}
