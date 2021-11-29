@@ -38,7 +38,7 @@ function Card(props) {
             className="card__like button button_empty button_hover_light"
             type="button"
           />
-          <span className="card__likes-count">{props.card.likes.length}</span>
+          <span className={cardLikeButtonClassName}>{props.card.likes.length}</span>
         </div>
       </div>
     </li>
