@@ -8,7 +8,6 @@ const PopupWithForm = ({
   closeAllPopups,
   buttonText,
   handleSubmit,
-  
 }) => {
   return (
     <section
@@ -24,7 +23,7 @@ const PopupWithForm = ({
           onClick={closeAllPopups}
         />
         <h2 className="popup__title">{title}</h2>
-        <form className="popup__form" >
+        <form className="popup__form">
           {children}
           <button
             className="popup__save button button_hover_darker"

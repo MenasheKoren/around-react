@@ -41,6 +41,16 @@ function App() {
     });
   }
 
+  function handleUpdateUser(userData) {
+    api
+      .editUserInfo()
+      .then(() => {
+        console.log(userData.name, userData.about);
+        closeAllPopups();
+      })
+      .catch((err) => console.log(`Error.....: ${err}`));
+  }
+
   function handleEditAvatarClick() {
     setIsEditAvatarPopupOpen(true);
   }
@@ -100,8 +110,9 @@ function App() {
           <EditProfilePopup
             isOpen={isEditProfilePopupOpen}
             closeAllPopups={closeAllPopups}
+            onUpdateUser={handleUpdateUser}
           />
-          
+
           <PopupWithForm
             name="add-card"
             title="New place"

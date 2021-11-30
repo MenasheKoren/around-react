@@ -2,7 +2,7 @@ import React from "react";
 import PopupWithForm from "./PopupWithForm";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
-export const EditProfilePopup = (props, { isOpen, closeAllPopups }) => {
+export const EditProfilePopup = ({ isOpen, closeAllPopups, props }) => {
   const [name, setName] = React.useState("");
   const [description, setDescription] = React.useState("");
 
