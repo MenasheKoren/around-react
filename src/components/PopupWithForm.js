@@ -1,18 +1,20 @@
 import React from "react";
 
 const PopupWithForm = ({
-                         name,
-                         title,
-                         children,
-                         isOpen,
-                         closeAllPopups,
-                         buttonText
-                       }) => {
+  name,
+  title,
+  children,
+  isOpen,
+  closeAllPopups,
+  buttonText,
+  handleSubmit,
+  
+}) => {
   return (
     <section
       className={[
         `popup popup_type_${name}`,
-        isOpen ? "popup_opened" : ""
+        isOpen ? "popup_opened" : "",
       ].join(" ")}
     >
       <div className="popup__container">
@@ -22,12 +24,13 @@ const PopupWithForm = ({
           onClick={closeAllPopups}
         />
         <h2 className="popup__title">{title}</h2>
-        <form className="popup__form">
+        <form className="popup__form" >
           {children}
           <button
             className="popup__save button button_hover_darker"
             type="submit"
-            disabled
+            onSubmit={handleSubmit}
+            // disabled
           >
             {buttonText}
           </button>

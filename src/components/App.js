@@ -9,6 +9,7 @@ import ImagePopup from "./ImagePopup";
 
 import React, { useEffect } from "react";
 import api from "../utils/api";
+import { EditProfilePopup } from "./EditProfilePopup";
 
 function App() {
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] =
@@ -96,39 +97,11 @@ function App() {
             />
             <span className="error-message" id="image-link-input-error" />
           </PopupWithForm>
-          <PopupWithForm
-            name="edit-profile"
-            title="Edit profile"
-            buttonText="Save"
+          <EditProfilePopup
             isOpen={isEditProfilePopupOpen}
             closeAllPopups={closeAllPopups}
-          >
-            <input
-              id="name-input"
-              className="field-input field-input_type_name"
-              name="name"
-              type="text"
-              placeholder="Name"
-              required
-              minLength="2"
-              maxLength="40"
-              pattern=".*\S.*"
-            />
-            <span className="error-message" id="name-input-error" />
-
-            <input
-              id="profession-input"
-              className="field-input field-input_type_profession"
-              name="profession"
-              type="text"
-              placeholder="Profession"
-              required
-              minLength="2"
-              maxLength="200"
-              pattern=".*\S.*"
-            />
-            <span className="error-message" id="profession-input-error" />
-          </PopupWithForm>
+          />
+          
           <PopupWithForm
             name="add-card"
             title="New place"
