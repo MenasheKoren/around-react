@@ -2,7 +2,7 @@ import React from "react";
 import PopupWithForm from "./PopupWithForm";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
-export const EditProfilePopup = ({ isOpen, closeAllPopups, props }) => {
+export const EditProfilePopup = ({ isOpen, closeAllPopups, onUpdateUser }) => {
   const [name, setName] = React.useState("");
   const [description, setDescription] = React.useState("");
 
@@ -23,20 +23,17 @@ export const EditProfilePopup = ({ isOpen, closeAllPopups, props }) => {
   }, [currentUser]);
 
   function handleSubmit(e) {
-    // Prevent the browser from navigating to the form address
     e.preventDefault();
-
-    // Pass the values of the managed components to the external handler
-    props.onUpdateUser({
+    onUpdateUser({
       name,
-      about: description,
+      description,
     });
   }
 
   return (
     <PopupWithForm
       isOpen={isOpen}
-      onSubmit={handleSubmit}
+      handleSubmit={handleSubmit}
       closeAllPopups={closeAllPopups}
       name="edit"
       buttonText="Save"

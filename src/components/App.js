@@ -41,11 +41,11 @@ function App() {
     });
   }
 
-  function handleUpdateUser(userData) {
+  function handleUpdateUser(currentUser) {
     api
       .editUserInfo()
       .then(() => {
-        console.log(userData.name, userData.about);
+        console.log(currentUser.name, currentUser.about);
         closeAllPopups();
       })
       .catch((err) => console.log(`Error.....: ${err}`));

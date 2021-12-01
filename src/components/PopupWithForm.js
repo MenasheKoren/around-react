@@ -23,12 +23,12 @@ const PopupWithForm = ({
           onClick={closeAllPopups}
         />
         <h2 className="popup__title">{title}</h2>
-        <form className="popup__form">
+        <form className="popup__form" onSubmit={handleSubmit}>
           {children}
           <button
             className="popup__save button button_hover_darker"
             type="submit"
-            onSubmit={handleSubmit}
+            
             // disabled
           >
             {buttonText}
