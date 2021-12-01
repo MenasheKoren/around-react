@@ -41,14 +41,15 @@ function App() {
     });
   }
 
-  function handleUpdateUser(currentUser) {
+  function handleUpdateUser(data) {
+    console.log('first: ', data);
     api
       .editUserInfo()
       .then(() => {
-        console.log(currentUser.name, currentUser.about);
+        console.log('second: ', data);
         closeAllPopups();
       })
-      .catch((err) => console.log(`Error.....: ${err}`));
+      .catch((err) => console.log(`Error.....: (handleUpdateUser) ${err}`));
   }
 
   function handleEditAvatarClick() {

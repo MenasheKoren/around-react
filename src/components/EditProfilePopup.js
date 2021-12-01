@@ -6,10 +6,15 @@ export const EditProfilePopup = ({ isOpen, closeAllPopups, onUpdateUser }) => {
   const [name, setName] = React.useState("");
   const [description, setDescription] = React.useState("");
 
-  function handleChange(e) {
+  function handleNameChange(e) {
     e.preventDefault();
-    setName(e.target.name);
-    setDescription(e.target.description);
+    setName(e.target.value);
+    console.log();
+  }
+  
+  function handleDescriptionChange(e) {
+    e.preventDefault();
+    setDescription(e.target.value);
   }
 
   // Subscription to the context
@@ -42,7 +47,7 @@ export const EditProfilePopup = ({ isOpen, closeAllPopups, onUpdateUser }) => {
         id="name-input"
         className="field-input field-input_type_name"
         name={name}
-        onChange={handleChange}
+        onChange={handleNameChange}
         type="text"
         placeholder="Name"
         required
@@ -56,7 +61,7 @@ export const EditProfilePopup = ({ isOpen, closeAllPopups, onUpdateUser }) => {
         id="profession-input"
         className="field-input field-input_type_profession"
         name={description}
-        onChange={handleChange}
+        onChange={handleDescriptionChange}
         type="text"
         placeholder="Profession"
         required
