@@ -10,6 +10,7 @@ import ImagePopup from "./ImagePopup";
 import React, { useEffect } from "react";
 import api from "../utils/api";
 import { EditProfilePopup } from "./EditProfilePopup";
+import { EditAvatarPopup } from "./EditAvatarPopup";
 
 function App() {
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] =
@@ -47,6 +48,18 @@ function App() {
       .editUserInfo({ name, about: description })
       .then((name, description) => {
         setCurrentUser(name, description);
+      })
+      .then(() => {
+        closeAllPopups();
+      })
+      .catch((err) => console.log(`Error.....: (handleUpdateUser) ${err}`));
+  }
+
+  function handleUpdateAvatar(data) {
+    api
+      .editAvatar(data)
+      .then((avatar) => {
+        setCurrentUser(avatar);
       })
       .then(() => {
         closeAllPopups();
@@ -92,24 +105,12 @@ function App() {
             onDeletePlaceClick={handleDeletePlaceClick}
           />
           <Footer />
-
-          <PopupWithForm
-            name="edit-avatar"
-            title="Update profile picture"
-            buttonText="Save"
+          <EditAvatarPopup
             isOpen={isEditAvatarPopupOpen}
-            closeAllPopups={closeAllPopups}
-          >
-            <input
-              id="image-link-input"
-              className="field-input field-input_type_image-link"
-              name="image-link"
-              type="url"
-              placeholder="Image URL"
-              required
-            />
-            <span className="error-message" id="image-link-input-error" />
-          </PopupWithForm>
+            onClose={closeAllPopups}
+            onUpdateAvatar={handleUpdateAvatar}
+          />
+
           <EditProfilePopup
             isOpen={isEditProfilePopupOpen}
             closeAllPopups={closeAllPopups}

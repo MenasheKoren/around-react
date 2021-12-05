@@ -9,7 +9,6 @@ export const EditProfilePopup = ({ isOpen, closeAllPopups, onUpdateUser }) => {
   function handleNameChange(e) {
     e.preventDefault();
     setName(e.target.value);
-    console.log();
   }
   
   function handleDescriptionChange(e) {
