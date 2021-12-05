@@ -56,7 +56,7 @@ function App() {
   }
 
   function handleUpdateAvatar(data) {
-    const {avatar} = data.avatar;
+    const avatar = data.avatar.valueOf();
     api
       .editAvatar(avatar)
       .then((avatar) => {

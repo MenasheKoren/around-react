@@ -1,8 +1,8 @@
-import React, { useRef } from "react";
+import React from "react";
 import PopupWithForm from "./PopupWithForm";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
-export const EditAvatarPopup = ({isOpen, onUpdateAvatar, closeAllPopups}) => {
+export const EditAvatarPopup = ({ isOpen, onUpdateAvatar, closeAllPopups }) => {
   const currentUser = React.useContext(CurrentUserContext);
   const avatarRef = React.useRef(null);
   const [avatar, setAvatar] = React.useState("");
@@ -20,13 +20,13 @@ export const EditAvatarPopup = ({isOpen, onUpdateAvatar, closeAllPopups}) => {
     e.preventDefault();
 
     onUpdateAvatar({
-      avatar: avatarRef /* The value of the input which we got using the ref */,
+      avatar: avatarRef.current.value,
     });
   }
 
   return (
     <PopupWithForm
-      name="edit-avatar"
+      name={avatar}
       title="Update profile picture"
       buttonText="Save"
       isOpen={isOpen}
