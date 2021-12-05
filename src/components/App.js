@@ -148,7 +148,7 @@ function App(props) {
             handleCardClick={handleCardClick}
             onDeletePlaceClick={handleDeletePlaceClick}
           >
-            <section className="cards">
+            <cards>
               <ul className="card-list">
                 {cardList.map((card) => {
                   return (
@@ -162,7 +162,7 @@ function App(props) {
                   );
                 })}
               </ul>
-            </section>
+            </cards>
             {/*<cards onCardLike={handleCardLike} onCardDelete={handleDeleteCard} />*/}
           </Main>
           <Footer />
