@@ -46,7 +46,9 @@ function App() {
     api
       .editUserInfo({ name, about: description })
       .then((name, description) => {
-        console.log(name, description);
+        setCurrentUser(name, description);
+      })
+      .then(() => {
         closeAllPopups();
       })
       .catch((err) => console.log(`Error.....: (handleUpdateUser) ${err}`));
