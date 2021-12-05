@@ -56,8 +56,9 @@ function App() {
   }
 
   function handleUpdateAvatar(data) {
+    const {avatar} = data.avatar;
     api
-      .editAvatar(data)
+      .editAvatar(avatar)
       .then((avatar) => {
         setCurrentUser(avatar);
       })
