@@ -11,8 +11,9 @@ import React, { useEffect } from "react";
 import api from "../utils/api";
 import { EditProfilePopup } from "./EditProfilePopup";
 import { EditAvatarPopup } from "./EditAvatarPopup";
+import Card from "./Card";
 
-function App() {
+function App(props) {
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] =
     React.useState(false);
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] =
@@ -22,7 +23,7 @@ function App() {
     React.useState(false);
   const [isImagePopupOpen, setIsImagePopupOpen] = React.useState(false);
   const [selectedCardData, setSelectedCardData] = React.useState({});
-
+  const [cardList, setCardList] = React.useState([]);
   const [currentUser, setCurrentUser] = React.useState({});
 
   useEffect(() => {
@@ -34,6 +35,48 @@ function App() {
       .catch((err) => console.log(`Error.....: ${err}`));
   }, []);
 
+  useEffect(() => {
+    api
+      .getInitialCards()
+      .then((cardData) => {
+        setCardList([...cardData]);
+      })
+      .catch((err) => console.log(`Error.....: ${err}`));
+  }, []);
+
+  function handleCardLike(card) {
+    const isLiked = card.likes.some((i) => i._id === currentUser._id);
+    if (!isLiked) {
+      api
+        .addLikes(card._id, !isLiked)
+        .then((newCard) => {
+          setCardList((state) =>
+            state.map((c) => (c._id === card._id ? newCard : c))
+          );
+        })
+        .catch((err) => console.log(`Error.....: ${err}`));
+    } else {
+      api
+        .removeLikes(card._id, isLiked)
+        .then((newCard) => {
+          setCardList((state) =>
+            state.map((c) => (c._id === card._id ? newCard : c))
+          );
+        })
+        .catch((err) => console.log(`Error.....: ${err}`));
+    }
+  }
+
+  function handleDeleteCard(card) {
+    api
+      .deleteCard(card._id) /* Deletes the card with the matching ID */
+      .then(() => {
+        const deletedCardID = card._id;
+        setCardList(cardList.filter((card) => card._id !== deletedCardID));
+      })
+      .catch((err) => console.log(`Error.....: ${err}`));
+  }
+  
   function handleCardClick({ link, name }) {
     setIsImagePopupOpen(true);
     setSelectedCardData({
@@ -104,7 +147,24 @@ function App() {
             onAddPlaceClick={handleAddPlaceClick}
             handleCardClick={handleCardClick}
             onDeletePlaceClick={handleDeletePlaceClick}
-          />
+          >
+            <section className="cards">
+              <ul className="card-list">
+                {cardList.map((card) => {
+                  return (
+                    <Card
+                      card={card}
+                      key={card._id}
+                      onCardClick={props.handleCardClick}
+                      onCardLike={handleCardLike}
+                      onCardDelete={handleDeleteCard}
+                    />
+                  );
+                })}
+              </ul>
+            </section>
+            {/*<cards onCardLike={handleCardLike} onCardDelete={handleDeleteCard} />*/}
+          </Main>
           <Footer />
           <EditAvatarPopup
             isOpen={isEditAvatarPopupOpen}
