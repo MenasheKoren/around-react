@@ -42,11 +42,11 @@ function App() {
   }
 
   function handleUpdateUser(data) {
-    console.log('first: ', data);
+    const { name, description } = data;
     api
-      .editUserInfo()
-      .then(() => {
-        console.log('second: ', data);
+      .editUserInfo({ name, about: description })
+      .then((name, description) => {
+        console.log(name, description);
         closeAllPopups();
       })
       .catch((err) => console.log(`Error.....: (handleUpdateUser) ${err}`));
