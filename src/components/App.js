@@ -11,7 +11,6 @@ import React, { useEffect } from "react";
 import api from "../utils/api";
 import { EditProfilePopup } from "./EditProfilePopup";
 import { EditAvatarPopup } from "./EditAvatarPopup";
-import Card from "./Card";
 
 function App() {
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] =
@@ -147,24 +146,11 @@ function App() {
             onAddPlaceClick={handleAddPlaceClick}
             handleCardClick={handleCardClick}
             onDeletePlaceClick={handleDeletePlaceClick}
-            cards={[cardList]}
-          >
-            <section>
-              <ul className="card-list">
-                {cardList.map((card) => {
-                   return (
-                    <Card
-                      card={card}
-                      key={card._id}
-                      onCardClick={handleCardClick}
-                      onCardLike={handleCardLike}
-                      onCardDelete={handleDeleteCard}
-                    />
-                  );
-                })}
-              </ul>
-            </section>
-          </Main>
+            cards={cardList}
+            handleCardLike={handleCardLike}
+            handleDeleteCard={handleDeleteCard}
+          />
+          
           <Footer />
           <EditAvatarPopup
             isOpen={isEditAvatarPopupOpen}

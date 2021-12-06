@@ -1,6 +1,7 @@
 import React from "react";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 import edit from "../images/edit.svg";
+import Card from "./Card";
 
 function Main(props) {
   const currentUser = React.useContext(CurrentUserContext);
@@ -42,13 +43,21 @@ function Main(props) {
           />
         </div>
       </section>
-
-      <section
-        className="cards"
-        onCardLike={props.onCardLike}
-        onCardDelete={props.onCardDelete}
-      >
-        {props.cards}
+  
+      <section className="cards">
+        <ul className="card-list">
+          {props.cards.map((card) => {
+            return (
+              <Card
+                card={card}
+                key={card._id}
+                onCardClick={props.handleCardClick}
+                onCardLike={props.handleCardLike}
+                onCardDelete={props.handleDeleteCard}
+              />
+            );
+          })}
+        </ul>
       </section>
     </main>
   );
