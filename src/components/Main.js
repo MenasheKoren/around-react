@@ -2,15 +2,7 @@ import React from "react";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 import edit from "../images/edit.svg";
 
-function Main({
-  cards,
-  children,
-  onAddPlaceClick,
-  onCardDelete,
-  onCardLike,
-  onEditAvatarClick,
-  onEditProfileClick,
-}) {
+function Main(props) {
   const currentUser = React.useContext(CurrentUserContext);
 
   return (
@@ -23,7 +15,7 @@ function Main({
             alt="Jacques Cousteau smiling on the sea"
           />
           <img
-            onClick={onEditAvatarClick}
+            onClick={props.onEditAvatarClick}
             className="avatar__edit-icon"
             src={edit}
             alt="Edit icon"
@@ -34,7 +26,7 @@ function Main({
             <div className=" profile-info__edit">
               <h1 className=" edit-name ellipses">{currentUser.name}</h1>
               <button
-                onClick={onEditProfileClick}
+                onClick={props.onEditProfileClick}
                 className=" edit-button button button_hover_dark"
                 type=" button"
               />
@@ -44,7 +36,7 @@ function Main({
             </p>
           </div>
           <button
-            onClick={onAddPlaceClick}
+            onClick={props.onAddPlaceClick}
             className=" add-button button button_hover_dark"
             type=" button"
           />
@@ -53,28 +45,11 @@ function Main({
 
       <section
         className="cards"
-        onCardLike={onCardLike}
-        onCardDelete={onCardDelete}>
-        {cards}
-        {children}
+        onCardLike={props.onCardLike}
+        onCardDelete={props.onCardDelete}
+      >
+        {props.cards}
       </section>
-
-      {/*<ul className="card-list">
-          {cardList.map((card) => {
-            return ({/*<ul className="card-list">
-          {cardList.map((card) => {
-            return (
-              <Card
-                card={card}
-                key={card._id}
-                onCardClick={props.handleCardClick}
-                onCardLike={handleCardLike}
-                onCardDelete={handleDeleteCard}
-              />
-            );
-          })}
-        </ul>*/}
-      {/*</section>*/}
     </main>
   );
 }

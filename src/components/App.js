@@ -147,11 +147,12 @@ function App() {
             onAddPlaceClick={handleAddPlaceClick}
             handleCardClick={handleCardClick}
             onDeletePlaceClick={handleDeletePlaceClick}
+            cards={[cardList]}
           >
-            <cards>
+            <section>
               <ul className="card-list">
                 {cardList.map((card) => {
-                  return (
+                   return (
                     <Card
                       card={card}
                       key={card._id}
@@ -162,8 +163,7 @@ function App() {
                   );
                 })}
               </ul>
-            </cards>
-            {/*<cards onCardLike={handleCardLike} onCardDelete={handleDeleteCard} />*/}
+            </section>
           </Main>
           <Footer />
           <EditAvatarPopup
