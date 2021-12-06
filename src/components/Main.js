@@ -4,6 +4,7 @@ import edit from "../images/edit.svg";
 
 function Main({
   cards,
+  children,
   onAddPlaceClick,
   onCardDelete,
   onCardLike,
@@ -53,8 +54,10 @@ function Main({
       <section
         className="cards"
         onCardLike={onCardLike}
-        onCardDelete={onCardDelete}
-      />
+        onCardDelete={onCardDelete}>
+        {cards}
+        {children}
+      </section>
 
       {/*<ul className="card-list">
           {cardList.map((card) => {

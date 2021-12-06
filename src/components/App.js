@@ -13,7 +13,7 @@ import { EditProfilePopup } from "./EditProfilePopup";
 import { EditAvatarPopup } from "./EditAvatarPopup";
 import Card from "./Card";
 
-function App(props) {
+function App() {
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] =
     React.useState(false);
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] =
@@ -69,14 +69,14 @@ function App(props) {
 
   function handleDeleteCard(card) {
     api
-      .deleteCard(card._id) /* Deletes the card with the matching ID */
+      .deleteCard(card._id)
       .then(() => {
         const deletedCardID = card._id;
         setCardList(cardList.filter((card) => card._id !== deletedCardID));
       })
       .catch((err) => console.log(`Error.....: ${err}`));
   }
-  
+
   function handleCardClick({ link, name }) {
     setIsImagePopupOpen(true);
     setSelectedCardData({
@@ -155,7 +155,7 @@ function App(props) {
                     <Card
                       card={card}
                       key={card._id}
-                      onCardClick={props.handleCardClick}
+                      onCardClick={handleCardClick}
                       onCardLike={handleCardLike}
                       onCardDelete={handleDeleteCard}
                     />
