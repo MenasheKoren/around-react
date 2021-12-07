@@ -5,22 +5,18 @@ import { CurrentUserContext } from "../contexts/CurrentUserContext";
 export const EditProfilePopup = ({ isOpen, closeAllPopups, onUpdateUser }) => {
   const [name, setName] = React.useState("");
   const [description, setDescription] = React.useState("");
+  const currentUser = React.useContext(CurrentUserContext);
 
   function handleNameChange(e) {
     e.preventDefault();
     setName(e.target.value);
   }
-  
+
   function handleDescriptionChange(e) {
     e.preventDefault();
     setDescription(e.target.value);
   }
 
-  // Subscription to the context
-  const currentUser = React.useContext(CurrentUserContext);
-
-  // After loading the current user from the API
-  // their data will be used in managed components.
   React.useEffect(() => {
     setName(currentUser.name);
     setDescription(currentUser.about);

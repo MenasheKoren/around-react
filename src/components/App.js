@@ -11,6 +11,7 @@ import React, { useEffect } from "react";
 import api from "../utils/api";
 import { EditProfilePopup } from "./EditProfilePopup";
 import { EditAvatarPopup } from "./EditAvatarPopup";
+import { AddPlacePopup } from "./AddPlacePopup";
 
 function App() {
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] =
@@ -24,6 +25,7 @@ function App() {
   const [selectedCardData, setSelectedCardData] = React.useState({});
   const [cardList, setCardList] = React.useState([]);
   const [currentUser, setCurrentUser] = React.useState({});
+  const [cards, setCards] = React.useState([])
 
   useEffect(() => {
     api
@@ -31,7 +33,7 @@ function App() {
       .then((userData) => {
         setCurrentUser(userData);
       })
-      .catch((err) => console.log(`Error.....: ${err}`));
+      .catch((err) => console.log(`Error.....: (getUserInfo) ${err}`));
   }, []);
 
   useEffect(() => {
@@ -40,7 +42,7 @@ function App() {
       .then((cardData) => {
         setCardList([...cardData]);
       })
-      .catch((err) => console.log(`Error.....: ${err}`));
+      .catch((err) => console.log(`Error.....: (getInitialCards) ${err}`));
   }, []);
 
   function handleCardLike(card) {
@@ -53,7 +55,7 @@ function App() {
             state.map((c) => (c._id === card._id ? newCard : c))
           );
         })
-        .catch((err) => console.log(`Error.....: ${err}`));
+        .catch((err) => console.log(`Error.....: (addLikes) ${err}`));
     } else {
       api
         .removeLikes(card._id, isLiked)
@@ -62,7 +64,7 @@ function App() {
             state.map((c) => (c._id === card._id ? newCard : c))
           );
         })
-        .catch((err) => console.log(`Error.....: ${err}`));
+        .catch((err) => console.log(`Error.....: (removeLikes) ${err}`));
     }
   }
 
@@ -73,7 +75,7 @@ function App() {
         const deletedCardID = card._id;
         setCardList(cardList.filter((card) => card._id !== deletedCardID));
       })
-      .catch((err) => console.log(`Error.....: ${err}`));
+      .catch((err) => console.log(`Error.....: (handleDeleteCard) ${err}`));
   }
 
   function handleCardClick({ link, name }) {
@@ -95,6 +97,22 @@ function App() {
         closeAllPopups();
       })
       .catch((err) => console.log(`Error.....: (handleUpdateUser) ${err}`));
+  }
+  
+  function handleAddPlaceSubmit(data, cards) {
+    console.log(data);
+    console.log(cards);
+    let newCard;
+    api
+      .editUserInfo()
+      .then(() => {
+        console.log('123');
+        setCards([newCard, ...cards]);
+      })
+      .then(() => {
+        closeAllPopups();
+      })
+      .catch((err) => console.log(`Error.....: (handleAddPlaceSubmit) ${err}`));
   }
 
   function handleUpdateAvatar(data) {
@@ -150,7 +168,7 @@ function App() {
             handleCardLike={handleCardLike}
             handleDeleteCard={handleDeleteCard}
           />
-          
+
           <Footer />
           <EditAvatarPopup
             isOpen={isEditAvatarPopupOpen}
@@ -164,36 +182,12 @@ function App() {
             onUpdateUser={handleUpdateUser}
           />
 
-          <PopupWithForm
-            name="add-card"
-            title="New place"
-            buttonText="Create"
+          <AddPlacePopup
             isOpen={isAddPlacePopupOpen}
             closeAllPopups={closeAllPopups}
-          >
-            <input
-              id="card-title-input"
-              className="field-input field-input_type_card-title"
-              name="card-title"
-              type="text"
-              placeholder="Title"
-              required
-              minLength="1"
-              maxLength="30"
-              pattern=".*\S.*"
-            />
-            <span className="error-message" id="card-title-input-error" />
+            onUpdateAddPlace={handleAddPlaceSubmit}
+          />
 
-            <input
-              id="card-link-input"
-              className="field-input field-input_type_card-link"
-              name="card-link"
-              type="url"
-              placeholder="Image URL"
-              required
-            />
-            <span className="error-message" id="card-link-input-error" />
-          </PopupWithForm>
           <PopupWithForm
             name="remove-card"
             title="Are you sure?"
