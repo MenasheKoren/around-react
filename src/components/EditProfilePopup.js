@@ -43,6 +43,7 @@ export const EditProfilePopup = ({ isOpen, closeAllPopups, onUpdateUser }) => {
         className="field-input field-input_type_name"
         name={name}
         onChange={handleNameChange}
+        value={name || ''}
         type="text"
         placeholder="Name"
         required
@@ -57,6 +58,7 @@ export const EditProfilePopup = ({ isOpen, closeAllPopups, onUpdateUser }) => {
         className="field-input field-input_type_profession"
         name={description}
         onChange={handleDescriptionChange}
+        value={description || ''}
         type="text"
         placeholder="Profession"
         required
