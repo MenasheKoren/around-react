@@ -3,7 +3,15 @@ import { CurrentUserContext } from "../contexts/CurrentUserContext";
 import edit from "../images/edit.svg";
 import Card from "./Card";
 
-function Main(props) {
+function Main({
+  cardList,
+  handleCardClick,
+  handleCardLike,
+  handleDeleteCard,
+  onAddPlaceClick,
+  onEditAvatarClick,
+  onEditProfileClick,
+}) {
   const currentUser = React.useContext(CurrentUserContext);
 
   return (
@@ -16,7 +24,7 @@ function Main(props) {
             alt="Jacques Cousteau smiling on the sea"
           />
           <img
-            onClick={props.onEditAvatarClick}
+            onClick={onEditAvatarClick}
             className="avatar__edit-icon"
             src={edit}
             alt="Edit icon"
@@ -27,7 +35,7 @@ function Main(props) {
             <div className=" profile-info__edit">
               <h1 className=" edit-name ellipses">{currentUser.name}</h1>
               <button
-                onClick={props.onEditProfileClick}
+                onClick={onEditProfileClick}
                 className=" edit-button button button_hover_dark"
                 type=" button"
               />
@@ -37,23 +45,23 @@ function Main(props) {
             </p>
           </div>
           <button
-            onClick={props.onAddPlaceClick}
+            onClick={onAddPlaceClick}
             className=" add-button button button_hover_dark"
             type=" button"
           />
         </div>
       </section>
-  
+
       <section className="cards">
         <ul className="card-list">
-          {props.cards.map((card) => {
+          {cardList.map((card) => {
             return (
               <Card
                 card={card}
                 key={card._id}
-                onCardClick={props.handleCardClick}
-                onCardLike={props.handleCardLike}
-                onCardDelete={props.handleDeleteCard}
+                onCardClick={handleCardClick}
+                onCardLike={handleCardLike}
+                onCardDelete={handleDeleteCard}
               />
             );
           })}

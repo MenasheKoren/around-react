@@ -25,7 +25,6 @@ function App() {
   const [selectedCardData, setSelectedCardData] = React.useState({});
   const [cardList, setCardList] = React.useState([]);
   const [currentUser, setCurrentUser] = React.useState({});
-  const [cards, setCards] = React.useState([])
 
   useEffect(() => {
     api
@@ -98,16 +97,14 @@ function App() {
       })
       .catch((err) => console.log(`Error.....: (handleUpdateUser) ${err}`));
   }
-  
-  function handleAddPlaceSubmit(data, cards) {
-    console.log(data);
-    console.log(cards);
-    let newCard;
+
+  function handleAddPlaceSubmit(data) {
+    // let newCard;
+    const { title, link } = data;
     api
-      .editUserInfo()
-      .then(() => {
-        console.log('123');
-        setCards([newCard, ...cards]);
+      .createCard({ name: title, link })
+      .then((newCard) => {
+        setCardList([newCard, ...cardList]);
       })
       .then(() => {
         closeAllPopups();
@@ -164,7 +161,7 @@ function App() {
             onAddPlaceClick={handleAddPlaceClick}
             handleCardClick={handleCardClick}
             onDeletePlaceClick={handleDeletePlaceClick}
-            cards={cardList}
+            cardList={cardList}
             handleCardLike={handleCardLike}
             handleDeleteCard={handleDeleteCard}
           />
