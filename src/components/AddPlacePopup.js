@@ -1,16 +1,14 @@
 import React from "react";
 import PopupWithForm from "./PopupWithForm";
-import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
 export function AddPlacePopup({ isOpen, onUpdateAddPlace, closeAllPopups }) {
-  const currentUser = React.useContext(CurrentUserContext);
   const [title, setTitle] = React.useState("");
   const [link, setLink] = React.useState("");
 
   React.useEffect(() => {
-    setTitle(currentUser.title);
-    setLink(currentUser.link);
-  }, [currentUser]);
+    setTitle('');
+    setLink('');
+  }, [isOpen]);
 
   function handleTitleChange(e) {
     e.preventDefault();

@@ -169,7 +169,7 @@ function App() {
           <Footer />
           <EditAvatarPopup
             isOpen={isEditAvatarPopupOpen}
-            onClose={closeAllPopups}
+            closeAllPopups={closeAllPopups}
             onUpdateAvatar={handleUpdateAvatar}
           />
 
